@@ -4,20 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- ✅ GitHub Pages base path (ajústalo si cambia el repo) -->
+  <base href="/TertuliaOro-Cielo/">
+
   <title>Tertulia Oro y Cielo | Hinchas de Everton</title>
   <meta name="description" content="Tertulia Oro y Cielo: análisis, debate y pasión ruletera. Novedades, panel y contenido para la familia evertoniana." />
   <meta name="theme-color" content="#061a2d" />
 
-  <!-- Favicons / Icons (tu carpeta Logos) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/Logos/logo_tertulia_32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/Logos/logo_tertulia_320_opt.png">
+  <!-- Favicons / Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/Logos/logo_tertulia_32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/Logos/logo_tertulia_320_opt.png">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Tertulia Oro y Cielo | Hinchas de Everton" />
   <meta property="og:description" content="El punto de encuentro de la familia evertoniana. Novedades, análisis y contenido Oro & Cielo." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_CL" />
-  <meta property="og:image" content="/assets/img/Logos/logo_tertulia_320_opt.png" />
+  <meta property="og:image" content="assets/img/Logos/logo_tertulia_320_opt.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,10 +29,14 @@
 
   <style>
     :root{
+      --azul-950:#04101f;
       --azul-900:#061a2d;
+      --azul-850:#071f36;
       --azul-800:#07213a;
       --azul-700:#0a2b4c;
+
       --oro-500:#f6c400;
+      --oro-450:#ffcf33;
       --oro-400:#ffd75a;
 
       --text:#ffffff;
@@ -52,9 +59,9 @@
       color:var(--text);
       background:
         radial-gradient(900px 550px at 18% -10%, rgba(246,196,0,.14), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(10,43,76,.70), transparent 55%),
+        radial-gradient(900px 600px at 90% 10%, rgba(10,43,76,.75), transparent 55%),
         radial-gradient(700px 500px at 40% 90%, rgba(246,196,0,.10), transparent 55%),
-        linear-gradient(180deg, var(--azul-900), #041323 70%, #04101f);
+        linear-gradient(180deg, var(--azul-900), var(--azul-950) 70%, #030c18);
       line-height:1.35;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -76,11 +83,12 @@
       margin:0 auto;
     }
 
+    /* Subtle pattern */
     .bg-pattern{
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.25;
+      opacity:.22;
       background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
       background-size: 26px 26px;
       mask-image: radial-gradient(900px 420px at 50% 20%, #000 35%, transparent 70%);
@@ -139,7 +147,7 @@
       padding: 10px 12px;
       border-radius: 14px;
       color: rgba(255,255,255,.86);
-      font-weight:800;
+      font-weight:900;
       transition: background .2s ease, color .2s ease;
     }
     .nav-links a:hover{ background: rgba(255,255,255,.06); color:#fff; }
@@ -167,8 +175,8 @@
       border-color: rgba(255,255,255,.20);
     }
     .btn-primary{
-      background: linear-gradient(135deg, rgba(246,196,0,1), rgba(246,196,0,.70));
-      border-color: rgba(246,196,0,.40);
+      background: linear-gradient(135deg, rgba(246,196,0,1), rgba(246,196,0,.72));
+      border-color: rgba(246,196,0,.42);
       color: rgba(0,0,0,.86);
       box-shadow: 0 18px 50px rgba(246,196,0,.14);
     }
@@ -202,7 +210,7 @@
       inset:0;
       z-index:0;
       pointer-events:none;
-      filter: blur(9px) brightness(.55) saturate(120%);
+      filter: blur(9px) brightness(.60) saturate(120%);
       transform: scale(1.08);
       will-change: transform;
     }
@@ -217,15 +225,19 @@
       min-width: 177.78vh;
       border:0;
     }
+
+    /* Overlay “broadcast” */
     .hero-overlay{
       position:absolute;
       inset:0;
       z-index:1;
       background:
         radial-gradient(900px 540px at 50% 30%, rgba(246,196,0,.12), transparent 60%),
-        radial-gradient(900px 540px at 40% 35%, rgba(6,26,45,.10), rgba(6,26,45,.65)),
-        linear-gradient(180deg, rgba(6,26,45,.10), rgba(6,26,45,.80));
+        radial-gradient(900px 540px at 40% 35%, rgba(6,26,45,.08), rgba(6,26,45,.62)),
+        linear-gradient(180deg, rgba(6,26,45,.08), rgba(6,26,45,.82));
     }
+
+    /* Shine + vignette */
     .hero-shine{
       position:absolute;
       inset:auto -20% -40% -20%;
@@ -234,6 +246,35 @@
       background: radial-gradient(closest-side, rgba(246,196,0,.18), transparent 70%);
       filter: blur(12px);
       pointer-events:none;
+    }
+
+    /* Fallback (si el video no carga) */
+    .hero-fallback{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: var(--s6) var(--s4);
+      background:
+        radial-gradient(800px 520px at 50% 35%, rgba(246,196,0,.12), transparent 60%),
+        linear-gradient(180deg, rgba(6,26,45,.40), rgba(6,26,45,.92));
+    }
+    .hero-fallback .fallback-box{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      max-width: 520px;
+    }
+    .hero-fallback p{
+      margin: 10px 0 14px;
+      color: rgba(255,255,255,.78);
+      font-weight: 700;
+      line-height: 1.6;
     }
 
     .hero-content{
@@ -251,7 +292,7 @@
       border:1px solid rgba(255,255,255,.14);
       border-radius: 999px;
       background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.86);
+      color: rgba(255,255,255,.88);
       font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -288,11 +329,11 @@
 
     .lead{
       margin: 0 auto;
-      max-width: 780px;
+      max-width: 820px;
       font-size: clamp(1rem, 2.2vw, 1.35rem);
       color: var(--muted);
-      font-weight:650;
-      line-height: 1.55;
+      font-weight:700;
+      line-height: 1.58;
     }
 
     .hero-actions{
@@ -309,7 +350,7 @@
       gap: 10px;
       align-items:center;
       color: rgba(255,255,255,.72);
-      font-weight:800;
+      font-weight:900;
       font-size: 14px;
     }
     .chev{
@@ -343,10 +384,10 @@
     }
     .section-subtitle{
       margin:0 auto;
-      max-width: 880px;
-      color: rgba(255,255,255,.74);
-      font-weight:650;
-      line-height:1.55;
+      max-width: 920px;
+      color: rgba(255,255,255,.76);
+      font-weight:700;
+      line-height:1.6;
     }
 
     .wave{
@@ -355,7 +396,7 @@
       background:
         radial-gradient(18px 18px at 18px 0, transparent 17px, rgba(255,255,255,.12) 18px) repeat-x;
       background-size: 36px 18px;
-      opacity:.35;
+      opacity:.33;
       margin: 0;
     }
 
@@ -409,7 +450,7 @@
     }
     .ig-meta small{
       color: rgba(255,255,255,.75);
-      font-weight:800;
+      font-weight:900;
       letter-spacing: .02em;
     }
     .ig-meta p{
@@ -441,8 +482,8 @@
       border-radius: var(--radius);
       padding: 14px 16px;
       color: rgba(255,255,255,.92);
-      font-weight:800;
-      line-height:1.45;
+      font-weight:900;
+      line-height:1.55;
       display:none;
     }
 
@@ -484,9 +525,9 @@
     }
     .about-text{
       margin:0;
-      color: rgba(255,255,255,.78);
-      font-weight: 650;
-      line-height:1.65;
+      color: rgba(255,255,255,.80);
+      font-weight: 700;
+      line-height:1.7;
     }
 
     .pill-list{
@@ -501,7 +542,7 @@
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       font-weight: 900;
-      color: rgba(255,255,255,.86);
+      color: rgba(255,255,255,.88);
       letter-spacing:.02em;
       display:inline-flex;
       gap: 8px;
@@ -530,8 +571,8 @@
     }
     .stat span{
       display:block;
-      color: rgba(255,255,255,.76);
-      font-weight: 800;
+      color: rgba(255,255,255,.78);
+      font-weight: 900;
       margin-top: 4px;
     }
 
@@ -590,8 +631,8 @@
     }
     .member-body p{
       margin:0;
-      color: rgba(255,255,255,.76);
-      font-weight: 800;
+      color: rgba(255,255,255,.78);
+      font-weight: 900;
       line-height: 1.45;
     }
 
@@ -617,16 +658,16 @@
     }
     .footer-note{
       margin:0;
-      color: rgba(255,255,255,.72);
-      font-weight: 650;
-      line-height: 1.6;
+      color: rgba(255,255,255,.74);
+      font-weight: 700;
+      line-height: 1.65;
     }
 
     .form{ display:grid; gap: 12px; margin-top: 12px; }
     .field{ display:grid; gap: 6px; }
     label{
       font-size: 13px;
-      color: rgba(255,255,255,.80);
+      color: rgba(255,255,255,.82);
       font-weight: 900;
       letter-spacing:.02em;
     }
@@ -651,7 +692,7 @@
       padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,.12);
       color: rgba(255,255,255,.62);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 13px;
       display:flex;
       flex-wrap:wrap;
@@ -688,7 +729,7 @@
     <div class="container">
       <nav class="nav">
         <a class="brand" href="#inicio" aria-label="Ir al inicio">
-          <img class="brand-logo" src="/assets/img/Logos/logo_tertulia_320_opt.png" alt="Tertulia Oro y Cielo">
+          <img class="brand-logo" src="assets/img/Logos/logo_tertulia_320_opt.png" alt="Tertulia Oro y Cielo">
           <span class="brand-text">Tertulia <span>Oro y Cielo</span></span>
         </a>
 
@@ -715,8 +756,8 @@
     <!-- HERO -->
     <section class="hero" aria-label="Portada">
       <div class="hero-bg" id="heroBg" aria-hidden="true">
-        <!-- Video: mejor compatibilidad con youtube-nocookie -->
         <iframe
+          id="heroIframe"
           title="Video de fondo"
           src="https://www.youtube-nocookie.com/embed/T3g5TTlU3fQ?autoplay=1&mute=1&loop=1&playlist=T3g5TTlU3fQ&controls=0&rel=0&modestbranding=1&playsinline=1"
           allow="autoplay; encrypted-media; picture-in-picture"
@@ -727,6 +768,22 @@
 
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-shine" aria-hidden="true"></div>
+
+      <!-- ✅ Fallback si el video no carga / bloqueado -->
+      <div class="hero-fallback" id="heroFallback" aria-hidden="true">
+        <div class="fallback-box">
+          <div class="kicker" style="justify-content:center;">
+            <span class="dot" aria-hidden="true"></span> Banner en modo seguro
+          </div>
+          <p>
+            Tu navegador/AdBlock o YouTube puede bloquear el video embebido.
+            Igual puedes verlo directamente.
+          </p>
+          <a class="btn btn-primary" href="https://www.youtube.com/watch?v=T3g5TTlU3fQ" target="_blank" rel="noopener">
+            Ver video en YouTube
+          </a>
+        </div>
+      </div>
 
       <div class="container hero-content reveal">
         <div class="kicker"><span class="dot" aria-hidden="true"></span> Viña del Mar • Debate • Pasión</div>
@@ -752,12 +809,12 @@
         <div class="section-head reveal">
           <h2 class="section-title">Novedades Ruleteras</h2>
           <p class="section-subtitle">
-            Últimos 12 posts del Instagram oficial (grid 3×12). Si no tienes backend aún, igual se verá bonito con fallback.
+            En GitHub Pages no hay backend, así que se muestra un fallback bonito.
+            En tu Vultr puedes activar <code>/api/instagram-feed</code> para que cargue automático.
           </p>
         </div>
 
         <div class="ig-grid reveal" id="igGrid" aria-live="polite" aria-busy="true">
-          <!-- Skeletons (12) -->
           <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
           <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
           <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
@@ -765,8 +822,7 @@
         </div>
 
         <div class="ig-error" id="igError">
-          No se pudo cargar el feed automático. Necesitas un endpoint <code>/api/instagram-feed</code>.
-          Mientras tanto:
+          No se pudo cargar el feed automático. Mientras tanto:
           <a class="btn btn-primary" style="margin-left:10px" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Abrir Instagram</a>
         </div>
       </div>
@@ -789,7 +845,7 @@
             <h3 class="about-title">Nuestra esencia</h3>
             <p class="about-text">
               Tertulia Oro y Cielo nace para reunir a la familia evertoniana: analizar partidos, debatir decisiones, celebrar triunfos
-              y sostener el sentimiento en las buenas y en las difíciles. Sin humo: conversación con identidad ruletera.
+              y sostener el sentimiento en las buenas y en las difíciles. Conversación con identidad ruletera.
             </p>
 
             <div class="pill-list" aria-label="Pilares">
@@ -803,7 +859,8 @@
           <aside class="card reveal">
             <h3 class="about-title">Lo que hacemos</h3>
             <p class="about-text">
-              Resúmenes, opiniones, previas, post-partido y contenido para compartir. Este bloque queda listo para sumar “Programas”, “Invitados” o “Sponsors”.
+              Resúmenes, opiniones, previas, post-partido y contenido para compartir.
+              Este bloque queda listo para sumar “Programas”, “Invitados” o “Sponsors”.
             </p>
 
             <div class="stats" aria-label="Indicadores">
@@ -825,136 +882,30 @@
         <div class="section-head reveal">
           <h2 class="section-title">Panel Oro &amp; Cielo</h2>
           <p class="section-subtitle">
-            Equipo completo con nombres y cargos. Si falta alguna foto en la carpeta, se mostrará un avatar de respaldo.
+            Equipo completo con nombres y cargos.
           </p>
         </div>
 
         <div class="panel-grid">
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/jonathan-gonzalez.webp" alt="Jonathan Gonzalez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Jonathan Gonzalez</h3><p>Director</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/marcos-guardia.webp" alt="Marcos Guardia" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Marcos Guardia</h3><p>Representante Legal</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/alejandra-pimentel.webp" alt="Alejandra Pimentel" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Alejandra Pimentel</h3><p>Conductora, Panelista y Periodista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/alonso-aravena.webp" alt="Alonso Aravena" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Alonso Aravena</h3><p>Diseñador Gráfico</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/constanza-guardia.webp" alt="Constanza Guardia" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Constanza Guardia</h3><p>Moderadora 1</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/alejandra-rivera.webp" alt="Alejandra Rivera" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Alejandra Rivera</h3><p>Moderadora 2</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/macarena-molina.webp" alt="Macarena Molina" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Macarena Molina</h3><p>Moderadora 3</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/victor-arancibia.webp" alt="Victor Arancibia" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Victor Arancibia</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/jaime-hernandez.webp" alt="Jaime Hernandez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Jaime Hernandez</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/paulina-moreno.webp" alt="Paulina Moreno" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Paulina Moreno</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/claudio-ibanez.webp" alt="Claudio Ibañez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Claudio Ibañez</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/macarena-gonzalez.webp" alt="Macarena Gonzalez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Macarena Gonzalez</h3><p>Conductor y Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/diego-veliz.webp" alt="Diego Veliz" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Diego Veliz</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/bastian-campos.webp" alt="Bastian Campos" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Bastian Campos</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/camila-diaz.webp" alt="Camila Diaz" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Camila Diaz</h3><p>Reportera Gráfica</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/daniel-nunez.webp" alt="Daniel Nuñez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Daniel Nuñez</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/esteban-cid.webp" alt="Esteban Cid" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Esteban Cid</h3><p>Panelista</p></div>
-          </article>
-
-          <article class="member reveal">
-            <div class="avatar">
-              <img src="/assets/img/panel/daniela-diaz.webp" alt="Daniela Diaz" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
-            </div>
-            <div class="member-body"><h3>Daniela Diaz</h3><p>Panelista</p></div>
-          </article>
+          <!-- helper: onerror fallback -->
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/jonathan-gonzalez.webp" alt="Jonathan Gonzalez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jonathan Gonzalez</h3><p>Director</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/marcos-guardia.webp" alt="Marcos Guardia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Marcos Guardia</h3><p>Representante Legal</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alejandra-pimentel.webp" alt="Alejandra Pimentel" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Pimentel</h3><p>Conductora, Panelista y Periodista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alonso-aravena.webp" alt="Alonso Aravena" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alonso Aravena</h3><p>Diseñador Gráfico</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/constanza-guardia.webp" alt="Constanza Guardia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Constanza Guardia</h3><p>Moderadora 1</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alejandra-rivera.webp" alt="Alejandra Rivera" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Rivera</h3><p>Moderadora 2</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/macarena-molina.webp" alt="Macarena Molina" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Macarena Molina</h3><p>Moderadora 3</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/victor-arancibia.webp" alt="Victor Arancibia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Victor Arancibia</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/jaime-hernandez.webp" alt="Jaime Hernandez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jaime Hernandez</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/paulina-moreno.webp" alt="Paulina Moreno" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Paulina Moreno</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/claudio-ibanez.webp" alt="Claudio Ibañez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Claudio Ibañez</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/macarena-gonzalez.webp" alt="Macarena Gonzalez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Macarena Gonzalez</h3><p>Conductor y Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/diego-veliz.webp" alt="Diego Veliz" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Diego Veliz</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/bastian-campos.webp" alt="Bastian Campos" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Bastian Campos</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/camila-diaz.webp" alt="Camila Diaz" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Camila Diaz</h3><p>Reportera Gráfica</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/daniel-nunez.webp" alt="Daniel Nuñez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Daniel Nuñez</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/esteban-cid.webp" alt="Esteban Cid" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Esteban Cid</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/daniela-diaz.webp" alt="Daniela Diaz" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Daniela Diaz</h3><p>Panelista</p></div></article>
         </div>
       </div>
     </section>
@@ -966,9 +917,7 @@
       <div class="footer-grid">
         <div class="reveal">
           <h2 class="footer-title">Contacto</h2>
-          <p class="footer-note">
-            ¿Colaboraciones, entrevistas o sponsors? Escríbenos y coordinamos.
-          </p>
+          <p class="footer-note">¿Colaboraciones, entrevistas o sponsors? Escríbenos y coordinamos.</p>
           <p class="footer-note" style="margin-top:10px;">
             Instagram:
             <a href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" style="color: var(--oro-500); font-weight:900;">
@@ -994,8 +943,8 @@
           </div>
 
           <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-          <small style="color: rgba(255,255,255,.66); font-weight:650; line-height:1.4;">
-            * Form listo para conectar con backend (o Formspree/EmailJS). Ahora solo valida y muestra feedback.
+          <small style="color: rgba(255,255,255,.66); font-weight:700; line-height:1.45;">
+            * Form listo para conectar con backend (o Formspree/EmailJS).
           </small>
         </form>
       </div>
@@ -1008,8 +957,10 @@
   </footer>
 
   <script>
-    // Avatar fallback (data-uri SVG) si falta alguna foto
-    window.__avatarFallback =
+    // ---------------------------
+    // Fallback avatar (data-uri SVG)
+    // ---------------------------
+    const AVATAR_FALLBACK =
       "data:image/svg+xml;charset=utf-8," +
       encodeURIComponent(`
         <svg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 64 64'>
@@ -1030,7 +981,16 @@
         </svg>
       `);
 
+    // Exponer para onerror
+    function imgFallback(img){
+      img.onerror = null;
+      img.src = AVATAR_FALLBACK;
+    }
+    window.imgFallback = imgFallback;
+
+    // ---------------------------
     // Header effect on scroll
+    // ---------------------------
     (function(){
       const header = document.getElementById("header");
       const onScroll = () => header?.classList.toggle("is-scrolled", (window.scrollY || 0) > 10);
@@ -1038,7 +998,9 @@
       onScroll();
     })();
 
+    // ---------------------------
     // Mobile menu
+    // ---------------------------
     function toggleMobileMenu(){
       const links = document.getElementById("navLinks");
       if(!links) return;
@@ -1058,7 +1020,9 @@
     }
     window.toggleMobileMenu = toggleMobileMenu;
 
-    // Hero parallax (movement on scroll)
+    // ---------------------------
+    // Hero parallax
+    // ---------------------------
     (function(){
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if(prefersReduced) return;
@@ -1080,7 +1044,9 @@
       onScroll();
     })();
 
+    // ---------------------------
     // Reveal on scroll
+    // ---------------------------
     (function(){
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if(prefersReduced){
@@ -1099,16 +1065,43 @@
       document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     })();
 
-    // Instagram Feed (3x12) — requiere backend opcional:
-    // GET /api/instagram-feed?limit=12
-    // { "data": [ { "media_url":"...", "permalink":"...", "caption":"...", "timestamp":"..." } ] }
+    // ---------------------------
+    // Hero video fallback detection
+    // (No podemos detectar "play", pero sí detectar bloqueos frecuentes)
+    // ---------------------------
+    (function(){
+      const fallback = document.getElementById("heroFallback");
+      const iframe = document.getElementById("heroIframe");
+      if(!fallback || !iframe) return;
+
+      // Si hay bloqueos por extensions/csp, normalmente queda en blanco.
+      // Mostramos fallback a los 2500ms, y lo escondemos si el iframe dispara load.
+      let loaded = false;
+
+      iframe.addEventListener("load", () => {
+        loaded = true;
+        // No ocultamos automáticamente para evitar “flicker” en navegadores lentos.
+        // Si quieres ocultarlo siempre al load, descomenta:
+        // fallback.style.display = "none";
+      });
+
+      setTimeout(() => {
+        if(!loaded){
+          fallback.style.display = "flex";
+        }
+      }, 2500);
+    })();
+
+    // ---------------------------
+    // Instagram Feed (3x12) — intenta endpoint, si falla usa fallback
+    // ---------------------------
     async function loadInstagram(limit = 12){
       const grid = document.getElementById("igGrid");
       const errorBox = document.getElementById("igError");
       if(!grid) return;
 
       try{
-        const res = await fetch(`/api/instagram-feed?limit=${encodeURIComponent(limit)}`, { cache: "no-store" });
+        const res = await fetch(`api/instagram-feed?limit=${encodeURIComponent(limit)}`, { cache: "no-store" });
         if(!res.ok) throw new Error("HTTP " + res.status);
 
         const json = await res.json();
@@ -1124,7 +1117,7 @@
 
           return `
             <a class="ig-card" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir post en Instagram">
-              <img class="ig-media" src="${escapeHtml(url)}" alt="${escapeHtml(caption)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+              <img class="ig-media" src="${escapeHtml(url)}" alt="${escapeHtml(caption)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${AVATAR_FALLBACK}';">
               <div class="ig-gradient" aria-hidden="true"></div>
               <div class="ig-meta">
                 <small>${escapeHtml(date)}</small>
@@ -1138,10 +1131,10 @@
         grid.setAttribute("aria-busy", "false");
         if(errorBox) errorBox.style.display = "block";
 
-        // Fallback: 12 cards que llevan al Instagram
-        const fallback = Array.from({ length: 12 }).map((_, i) => `
+        // Fallback (GitHub Pages): 12 cards al Instagram
+        grid.innerHTML = Array.from({ length: 12 }).map(() => `
           <a class="ig-card" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram">
-            <img class="ig-media" src="${window.__avatarFallback}" alt="Instagram Tertulia Oro y Cielo" loading="lazy" decoding="async">
+            <img class="ig-media" src="${AVATAR_FALLBACK}" alt="Instagram Tertulia Oro y Cielo" loading="lazy" decoding="async">
             <div class="ig-gradient" aria-hidden="true"></div>
             <div class="ig-meta">
               <small>Instagram</small>
@@ -1149,7 +1142,6 @@
             </div>
           </a>
         `).join("");
-        grid.innerHTML = fallback;
 
         console.warn("IG feed error:", err);
       }
@@ -1186,3 +1178,4 @@
   </script>
 </body>
 </html>
+
