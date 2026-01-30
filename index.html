@@ -2,877 +2,1187 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tertulia Oro &amp; Cielo | Everton de Viña del Mar</title>
-  <meta name="description" content="Tertulia Oro & Cielo: noticias, análisis y conversación del Everton de Viña del Mar. Resultados y próximos partidos + Instagram." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Tertulia Oro y Cielo | Hinchas de Everton</title>
+  <meta name="description" content="Tertulia Oro y Cielo: análisis, debate y pasión ruletera. Novedades, panel y contenido para la familia evertoniana." />
+  <meta name="theme-color" content="#061a2d" />
+
+  <!-- Favicons / Icons (tu carpeta Logos) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/Logos/logo_tertulia_32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/Logos/logo_tertulia_320_opt.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tertulia Oro y Cielo | Hinchas de Everton" />
+  <meta property="og:description" content="El punto de encuentro de la familia evertoniana. Novedades, análisis y contenido Oro & Cielo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:image" content="/assets/img/Logos/logo_tertulia_320_opt.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      /* Everton vibe */
-      --blue-950:#04102c;
-      --blue-900:#061a44;
-      --blue-800:#0a2a74;
-      --blue-700:#0c3aa6;
+      --azul-900:#061a2d;
+      --azul-800:#07213a;
+      --azul-700:#0a2b4c;
+      --oro-500:#f6c400;
+      --oro-400:#ffd75a;
 
-      --yellow:#ffd200;
-      --yellow-2:#ffcc00;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.74);
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.12);
+      --shadow: 0 18px 70px rgba(0,0,0,.45);
 
-      --text:#f4f7ff;
-      --muted:rgba(244,247,255,.72);
-      --line:rgba(255,255,255,.12);
+      --radius: 18px;
+      --container: 1120px;
 
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(0,0,0,.16);
-
-      --radius:18px;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
-
-      --max: 1120px;
+      --s1: 8px; --s2: 12px; --s3: 16px; --s4: 24px; --s5: 36px; --s6: 56px; --s7: 80px;
     }
 
     *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
+    html, body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1000px 520px at 15% -10%, rgba(255,210,0,.25), transparent 60%),
-        radial-gradient(900px 480px at 90% 0%, rgba(18,105,255,.22), transparent 58%),
-        linear-gradient(180deg, var(--blue-950), var(--blue-900));
-      line-height:1.55;
+        radial-gradient(900px 550px at 18% -10%, rgba(246,196,0,.14), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(10,43,76,.70), transparent 55%),
+        radial-gradient(700px 500px at 40% 90%, rgba(246,196,0,.10), transparent 55%),
+        linear-gradient(180deg, var(--azul-900), #041323 70%, #04101f);
+      line-height:1.35;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x:hidden;
     }
+
     a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+    img{ max-width:100%; display:block; }
+    button,input,textarea{ font:inherit; }
 
-    /* Top bar */
-    .top{
-      position:sticky; top:0; z-index:20;
-      background: rgba(4,16,44,.72);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
+    :focus-visible{
+      outline:3px solid rgba(246,196,0,.78);
+      outline-offset:3px;
+      border-radius:12px;
     }
-    .top-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      min-width: 240px;
-    }
-    .mark{
-      width:12px; height:12px; border-radius:999px;
-      background: linear-gradient(90deg, var(--yellow), #ffffff);
-      box-shadow: 0 0 0 7px rgba(255,210,0,.14);
-    }
-    .brand strong{ font-size:14px; letter-spacing:.2px; }
-    .brand span{ display:block; font-size:12px; color:var(--muted); margin-top:2px; }
 
+    .container{
+      width:min(var(--container), calc(100% - 2*var(--s4)));
+      margin:0 auto;
+    }
+
+    .bg-pattern{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.25;
+      background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(900px 420px at 50% 20%, #000 35%, transparent 70%);
+      z-index:-1;
+    }
+
+    /* Header */
+    .site-header{
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:50;
+      transition: background .25s ease, border-color .25s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.is-scrolled{
+      background: rgba(6,26,45,.72);
+      backdrop-filter: blur(12px) saturate(140%);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
     .nav{
-      display:flex; gap:16px; align-items:center;
-      font-size:13px; color:var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--s3);
+      padding: 14px 0;
     }
-    .nav a{ padding:8px 10px; border-radius:999px; border:1px solid transparent; }
-    .nav a:hover{ color:var(--text); border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
+
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+    }
+    .brand-logo{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 46px rgba(246,196,0,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .brand-text{
+      font-weight: 900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+    .brand-text span{ color: var(--oro-500); }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .nav-links a{
+      padding: 10px 12px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.86);
+      font-weight:800;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover{ background: rgba(255,255,255,.06); color:#fff; }
+
+    .nav-cta{ display:flex; align-items:center; gap: 10px; }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:13px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      transition:.15s ease;
-      white-space:nowrap;
-      cursor:pointer;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); }
-    .btn-yellow{
-      background: linear-gradient(180deg, var(--yellow), var(--yellow-2));
-      color:#0a0f1f;
-      border-color: rgba(255,210,0,.55);
-      box-shadow: 0 12px 30px rgba(255,210,0,.12);
-    }
-    .btn-yellow:hover{ filter: brightness(.98); background: linear-gradient(180deg, #ffe046, var(--yellow-2)); }
-
-    /* Sections */
-    section{ padding:70px 0; }
-    .hairline{ border-top:1px solid var(--line); }
-
-    h1{
-      margin: 12px 0 12px;
-      font-size: clamp(38px, 4.8vw, 64px);
-      line-height:1.02;
-      letter-spacing:-1px;
-    }
-    h2{
-      margin:0 0 12px;
-      font-size: 22px;
-      letter-spacing:-.2px;
-    }
-    p{ margin:0 0 14px; color: var(--muted); font-size:16px; }
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:7px 12px;
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:999px;
-      background: rgba(0,0,0,.12);
-      color: rgba(255,255,255,.92);
-      font-size:13px;
-    }
-    .kdot{
-      width:8px; height:8px; border-radius:999px;
-      background: var(--yellow);
-      box-shadow: 0 0 0 5px rgba(255,210,0,.14);
-    }
-
-    /* Hero layout */
-    .hero{ padding:84px 0 72px; position:relative; overflow:hidden; }
-    .hero:after{
-      content:"";
-      position:absolute; inset:-140px -180px auto auto;
-      width:520px; height:520px; border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,210,0,.32), rgba(255,210,0,0));
-      pointer-events:none;
-      transform: rotate(10deg);
-      filter: blur(.2px);
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
-      align-items:start;
-      position:relative;
-      z-index:1;
-    }
-    .hero p{ max-width: 64ch; }
-    .hero-actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:18px;
-    }
-
-    /* Cards */
-    .card{
-      border:1px solid rgba(255,255,255,.14);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.16));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .card-pad{ padding:16px; }
-
-    /* Match widget */
-    .widget-head{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      margin-bottom:12px;
-    }
-    .widget-head h3{
-      margin:0;
-      font-size:14px;
-      letter-spacing:.2px;
-      color: rgba(255,255,255,.92);
-    }
-    .tiny{
-      font-size:12px;
-      color: rgba(255,255,255,.74);
-    }
-    .match-row{
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap:10px;
+      display:inline-flex;
       align-items:center;
-      padding:12px;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 16px;
       border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.14);
-      margin-bottom:10px;
-    }
-    .team{
-      display:flex; align-items:center; gap:10px;
-      min-width:0;
-    }
-    .badge{
-      width:30px; height:30px; border-radius:999px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:1000;
-      background: rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.14);
-      flex:0 0 auto;
-    }
-    .team b{
-      display:block;
-      font-size:13px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .team span{
-      display:block;
-      font-size:12px;
-      color: rgba(255,255,255,.72);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .score{
-      font-weight:1000;
-      font-size:16px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
+      border:1px solid var(--stroke);
       background: rgba(255,255,255,.06);
       color:#fff;
-      min-width: 64px;
-      text-align:center;
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
     }
-    .widget-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top:12px;
+    .btn:hover{
+      background: rgba(255,255,255,.10);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.20);
     }
-    .list{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      border-radius:16px;
-      padding:12px;
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(246,196,0,1), rgba(246,196,0,.70));
+      border-color: rgba(246,196,0,.40);
+      color: rgba(0,0,0,.86);
+      box-shadow: 0 18px 50px rgba(246,196,0,.14);
     }
-    .list h4{ margin:0 0 10px; font-size:13px; color: rgba(255,255,255,.92); }
-    .rowm{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:10px;
-      padding:9px 0;
-      border-top: 1px solid rgba(255,255,255,.10);
-    }
-    .rowm:first-of-type{ border-top:0; }
-    .rowm .left{ min-width:0; }
-    .rowm .left b{
-      display:block; font-size:12.5px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-      color: rgba(255,255,255,.92);
-    }
-    .rowm .left span{
-      display:block; font-size:12px; color: rgba(255,255,255,.68);
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .pill{
-      font-weight:1000;
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.14);
-      white-space:nowrap;
-      color: rgba(255,255,255,.92);
+    .btn-primary:hover{ transform: translateY(-2px); }
+
+    .burger{ display:none; }
+    @media (max-width: 860px){
+      .nav-links{ display:none; }
+      .burger{
+        display:inline-flex;
+        width:44px;height:44px;
+        border-radius:14px;
+        border:1px solid var(--stroke);
+        background: rgba(255,255,255,.06);
+        align-items:center; justify-content:center;
+      }
     }
 
-    /* Content blocks (Noticias, etc.) */
-    .block{
+    /* Hero */
+    .hero{
+      position:relative;
+      min-height: 92vh;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      padding-top: 88px;
+      isolation:isolate;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      filter: blur(9px) brightness(.55) saturate(120%);
+      transform: scale(1.08);
+      will-change: transform;
+    }
+    .hero-bg iframe{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.78vh;
+      border:0;
+    }
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        radial-gradient(900px 540px at 50% 30%, rgba(246,196,0,.12), transparent 60%),
+        radial-gradient(900px 540px at 40% 35%, rgba(6,26,45,.10), rgba(6,26,45,.65)),
+        linear-gradient(180deg, rgba(6,26,45,.10), rgba(6,26,45,.80));
+    }
+    .hero-shine{
+      position:absolute;
+      inset:auto -20% -40% -20%;
+      height: 420px;
+      z-index:2;
+      background: radial-gradient(closest-side, rgba(246,196,0,.18), transparent 70%);
+      filter: blur(12px);
+      pointer-events:none;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:3;
+      text-align:center;
+      padding: var(--s6) 0;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
       border:1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: var(--oro-500);
+      box-shadow: 0 0 0 6px rgba(246,196,0,.14);
+    }
+
+    h1{
+      margin: 18px 0 10px;
+      font-size: clamp(2.5rem, 6.2vw, 4.9rem);
+      line-height:1.02;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      font-weight:900;
+      text-shadow: 0 18px 70px rgba(0,0,0,.55);
+    }
+    .h1-accent{
+      color: var(--oro-500);
+      position:relative;
+      display:inline-block;
+    }
+    .h1-accent::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:-10px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(246,196,0,0), rgba(246,196,0,1), rgba(246,196,0,0));
+      opacity:.85;
+    }
+
+    .lead{
+      margin: 0 auto;
+      max-width: 780px;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--muted);
+      font-weight:650;
+      line-height: 1.55;
+    }
+
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-top: 24px;
+    }
+
+    .scroll-hint{
+      margin-top: 34px;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      color: rgba(255,255,255,.72);
+      font-weight:800;
+      font-size: 14px;
+    }
+    .chev{
+      width:18px;height:18px;
+      border:2px solid rgba(255,255,255,.55);
+      border-left:0;border-top:0;
+      transform: rotate(45deg);
+      border-radius:3px;
+      animation: float 1.4s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{ transform: rotate(45deg) translate(0,0); opacity:.65; }
+      50%{ transform: rotate(45deg) translate(0,6px); opacity:1; }
+    }
+
+    /* Sections */
+    section{ padding: var(--s7) 0; }
+    .section-head{
+      text-align:center;
+      display:grid;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .section-title{
+      margin:0;
+      font-size: clamp(1.7rem, 3.1vw, 2.5rem);
+      letter-spacing: .08em;
+      text-transform:uppercase;
+      font-weight:900;
+      color: var(--oro-500);
+    }
+    .section-subtitle{
+      margin:0 auto;
+      max-width: 880px;
+      color: rgba(255,255,255,.74);
+      font-weight:650;
+      line-height:1.55;
+    }
+
+    .wave{
+      height: 18px;
+      width: 100%;
+      background:
+        radial-gradient(18px 18px at 18px 0, transparent 17px, rgba(255,255,255,.12) 18px) repeat-x;
+      background-size: 36px 18px;
+      opacity:.35;
+      margin: 0;
+    }
+
+    /* Instagram grid */
+    .ig-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 860px){ .ig-grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 520px){ .ig-grid{ grid-template-columns: 1fr;} }
+
+    .ig-card{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+      aspect-ratio: 1/1;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      transform: translateY(0);
+    }
+    .ig-card:hover{
+      transform: translateY(-5px);
+      border-color: rgba(246,196,0,.40);
+      background: rgba(255,255,255,.08);
+    }
+    .ig-media{
+      width:100%;height:100%;
+      object-fit:cover;
+      transform: scale(1.02);
+      transition: transform .35s ease;
+      filter: saturate(115%) contrast(105%);
+    }
+    .ig-card:hover .ig-media{ transform: scale(1.06); }
+
+    .ig-gradient{
+      position:absolute;
+      inset:auto 0 0 0;
+      height: 48%;
+      background: linear-gradient(to top, rgba(0,0,0,.82), transparent);
+      pointer-events:none;
+    }
+    .ig-meta{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding: 14px 14px 12px;
+      display:grid;
+      gap: 6px;
+    }
+    .ig-meta small{
+      color: rgba(255,255,255,.75);
+      font-weight:800;
+      letter-spacing: .02em;
+    }
+    .ig-meta p{
+      margin:0;
+      color: rgba(255,255,255,.92);
+      font-weight:900;
+      font-size: 14px;
+      line-height:1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow:hidden;
+    }
+
+    .skeleton{
+      background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.12), rgba(255,255,255,.06));
+      background-size: 220% 100%;
+      animation: shimmer 1.2s infinite linear;
+    }
+    @keyframes shimmer{
+      0%{ background-position: 0% 0; }
+      100%{ background-position: 220% 0; }
+    }
+
+    .ig-error{
+      margin-top: 14px;
+      border: 1px solid rgba(246,196,0,.22);
+      background: rgba(246,196,0,.08);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      color: rgba(255,255,255,.92);
+      font-weight:800;
+      line-height:1.45;
+      display:none;
+    }
+
+    /* Quienes somos */
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 920px){ .about-grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset: -2px;
+      background: radial-gradient(520px 260px at 20% 10%, rgba(246,196,0,.12), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .card > *{ position:relative; z-index:1; }
+
+    .about-title{
+      margin: 0 0 10px;
+      font-weight: 900;
+      letter-spacing:.05em;
+      text-transform: uppercase;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.92);
+    }
+    .about-text{
+      margin:0;
+      color: rgba(255,255,255,.78);
+      font-weight: 650;
+      line-height:1.65;
+    }
+
+    .pill-list{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 900;
+      color: rgba(255,255,255,.86);
+      letter-spacing:.02em;
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+    }
+    .pill b{ color: var(--oro-500); }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .stat{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .stat strong{
+      display:block;
+      font-size: 1.5rem;
+      letter-spacing:.02em;
+      color: var(--oro-500);
+      font-weight: 900;
+    }
+    .stat span{
+      display:block;
+      color: rgba(255,255,255,.76);
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    /* Panel */
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+    .panel-grid{
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 1100px){ .panel-grid{ grid-template-columns: repeat(3, 1fr);} }
+    @media (max-width: 720px){ .panel-grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 430px){ .panel-grid{ grid-template-columns: 1fr;} }
+
+    .member{
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       border-radius: var(--radius);
       overflow:hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,.20);
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, border-color .18s ease;
     }
-    .block-head{
-      padding:18px 18px 0;
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:12px; flex-wrap:wrap;
-    }
-    .block-body{ padding:18px; }
-
-    /* Instagram placeholder */
-    .ig-box{
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:16px;
-      overflow:hidden;
-      background: rgba(0,0,0,.10);
-    }
-    .ig-placeholder{
-      padding:16px;
-      background: linear-gradient(180deg, rgba(255,210,0,.10), rgba(12,58,166,.12));
-    }
-    .ig-placeholder p{ margin:0; color: rgba(255,255,255,.82); font-size:14px; }
-    .ig-placeholder code{
-      display:block;
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      background: rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.86);
-      font-size:12px;
-      word-break: break-all;
+    .member:hover{
+      transform: translateY(-4px);
+      border-color: rgba(246,196,0,.35);
     }
 
-    /* Team section */
-    .team-grid{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:14px;
-      margin-top:12px;
-    }
-    .member{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.12);
-      border-radius: 16px;
-      padding:14px;
-    }
-    .member-top{
-      display:flex; align-items:center; gap:12px;
-      margin-bottom:10px;
-    }
     .avatar{
-      width:52px; height:52px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      aspect-ratio: 1/1;
       overflow:hidden;
-      flex:0 0 auto;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(300px 220px at 20% 10%, rgba(246,196,0,.18), transparent 60%),
+        linear-gradient(135deg, rgba(10,43,76,.85), rgba(6,26,45,.85));
     }
-    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .member b{ display:block; font-size:14px; color: rgba(255,255,255,.94); }
-    .member span{ display:block; font-size:12px; color: rgba(255,255,255,.70); margin-top:2px; }
+    .avatar img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display:block;
+    }
 
-    /* Contact */
-    form{ display:grid; gap:10px; margin-top:10px; }
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    label{ font-size:12px; color: rgba(255,255,255,.72); }
-    input, textarea{
-      width:100%;
-      padding:12px;
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:12px;
-      font-size:14px;
-      outline:none;
-      background: rgba(0,0,0,.14);
+    .member-body{
+      padding: 14px 14px 16px;
+    }
+    .member-body h3{
+      margin:0 0 6px;
+      font-size: .98rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing:.03em;
       color: rgba(255,255,255,.92);
     }
-    textarea{ min-height:120px; resize:vertical; }
-
-    footer{
-      padding:28px 0 44px;
-      border-top:1px solid var(--line);
-      color: rgba(255,255,255,.72);
-      font-size:13px;
-      background: rgba(0,0,0,.10);
+    .member-body p{
+      margin:0;
+      color: rgba(255,255,255,.76);
+      font-weight: 800;
+      line-height: 1.45;
     }
-    .foot{
-      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+
+    /* Footer */
+    footer{
+      background: linear-gradient(180deg, rgba(6,26,45,.85), rgba(4,16,31,.95));
+      border-top: 5px solid var(--oro-500);
+      padding: var(--s7) 0;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items:start;
+    }
+    @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr; } }
+
+    .footer-title{
+      margin:0 0 10px;
+      font-weight: 900;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+    }
+    .footer-note{
+      margin:0;
+      color: rgba(255,255,255,.72);
+      font-weight: 650;
+      line-height: 1.6;
+    }
+
+    .form{ display:grid; gap: 12px; margin-top: 12px; }
+    .field{ display:grid; gap: 6px; }
+    label{
+      font-size: 13px;
+      color: rgba(255,255,255,.80);
+      font-weight: 900;
+      letter-spacing:.02em;
+    }
+    input, textarea{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:#fff;
+      outline:none;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(246,196,0,.55);
+      background: rgba(0,0,0,.28);
+    }
+    textarea{ resize: vertical; min-height: 110px; }
+
+    .footer-bottom{
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.62);
+      font-weight: 800;
+      font-size: 13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      justify-content: space-between;
       align-items:center;
     }
 
-    /* Responsive */
-    @media (max-width: 1020px){
-      .nav{ display:none; }
-      .hero-grid{ grid-template-columns:1fr; }
-      .team-grid{ grid-template-columns: repeat(2, 1fr); }
+    /* Reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .55s ease, transform .55s ease;
     }
-    @media (max-width: 760px){
-      section{ padding:56px 0; }
-      .widget-grid{ grid-template-columns:1fr; }
-      .team-grid{ grid-template-columns:1fr; }
-      .grid2{ grid-template-columns:1fr; }
+    .reveal.is-in{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .chev{ animation:none; }
+      .btn, .member, .ig-card, .ig-media{ transition:none; }
+      .reveal{ opacity:1; transform:none; }
     }
   </style>
 </head>
 
 <body>
-  <!-- TOP -->
-  <div class="top">
-    <div class="wrap">
-      <div class="top-inner">
-        <a class="brand" href="#inicio" aria-label="Inicio">
-          <span class="mark" aria-hidden="true"></span>
-          <div>
-            <strong>Tertulia Oro &amp; Cielo</strong>
-            <span>Everton de Viña del Mar</span>
-          </div>
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="header" aria-label="Barra de navegación">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
+          <img class="brand-logo" src="/assets/img/Logos/logo_tertulia_320_opt.png" alt="Tertulia Oro y Cielo">
+          <span class="brand-text">Tertulia <span>Oro y Cielo</span></span>
         </a>
 
-        <nav class="nav" aria-label="Navegación">
-          <a href="#noticias">Noticias</a>
+        <div class="nav-links" aria-label="Enlaces principales" id="navLinks">
+          <a href="#novedades">Novedades</a>
           <a href="#quienes">Quiénes somos</a>
-          <a href="#equipo">Equipo</a>
+          <a href="#panel">Panel</a>
           <a href="#contacto">Contacto</a>
-        </nav>
-
-        <a class="btn btn-yellow" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener">
-          Instagram
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- BANNER / HERO -->
-  <section id="inicio" class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <div class="kicker"><span class="kdot"></span> Comunidad Oro &amp; Cielo conectada por Instagram</div>
-          <h1>Noticias, análisis y conversación del Oro y Cielo.</h1>
-          <p>
-            Landing oficial de la tertulia: lo último desde Instagram y los partidos de Everton (últimos y próximos) cargados automáticamente.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-yellow" href="#noticias">Ver noticias</a>
-            <a class="btn" href="#equipo">Ver equipo</a>
-            <a class="btn" href="#contacto">Contacto</a>
-          </div>
-
-          <p class="tiny" id="dataStatus" style="margin-top:14px;">
-            Cargando partidos…
-          </p>
         </div>
 
-        <!-- RESULTADOS / WIDGET -->
-        <div class="card card-pad" aria-label="Partidos Everton">
-          <div class="widget-head">
-            <h3>Partidos Everton</h3>
-            <button class="btn btn-yellow" id="refreshBtn" type="button" style="padding:9px 12px; font-size:12px;">
-              Actualizar
-            </button>
-          </div>
-
-          <div class="match-row" id="lastMatchCard">
-            <div class="team">
-              <div class="badge">E</div>
-              <div>
-                <b>Último partido</b>
-                <span>—</span>
-              </div>
-            </div>
-            <div class="score">—</div>
-            <div class="team" style="justify-content:flex-end; text-align:right;">
-              <div>
-                <b>Rival</b>
-                <span>—</span>
-              </div>
-              <div class="badge" style="background:rgba(255,210,0,.12);">R</div>
-            </div>
-          </div>
-
-          <div class="match-row" id="nextMatchCard" style="margin-bottom:0;">
-            <div class="team">
-              <div class="badge">E</div>
-              <div>
-                <b>Próximo partido</b>
-                <span>—</span>
-              </div>
-            </div>
-            <div class="score">VS</div>
-            <div class="team" style="justify-content:flex-end; text-align:right;">
-              <div>
-                <b>Rival</b>
-                <span>—</span>
-              </div>
-              <div class="badge" style="background:rgba(255,210,0,.12);">R</div>
-            </div>
-          </div>
-
-          <div class="widget-grid">
-            <div class="list">
-              <h4>Últimos 5</h4>
-              <div id="last5"></div>
-            </div>
-            <div class="list">
-              <h4>Próximos 5</h4>
-              <div id="next5"></div>
-            </div>
-          </div>
-
-          <div class="tiny" style="margin-top:10px;">
-            Si la API no responde, se mostrará el último cache guardado (si existe).
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="hairline"></div>
-
-  <!-- NOTICIAS -->
-  <section id="noticias">
-    <div class="wrap">
-      <div class="block">
-        <div class="block-head">
-          <div>
-            <h2>Noticias</h2>
-            <p>Conectado con Instagram para mantener la web viva.</p>
-          </div>
-          <a class="btn btn-yellow" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener">
-            Abrir perfil
+        <div class="nav-cta">
+          <a class="btn" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">
+            Instagram
           </a>
-        </div>
+          <a class="btn btn-primary" href="#contacto">Hablemos</a>
 
-        <div class="block-body">
-          <div class="ig-box">
-            <div class="ig-placeholder">
-              <p>
-                Pega aquí el <strong>iframe/script</strong> de tu widget de Instagram (LightWidget / Elfsight / etc.) y elimina este bloque.
-              </p>
-              <code>
-                Ejemplo (pega tu iframe): &lt;iframe src="https://lightwidget.com/widgets/TU_WIDGET.html" style="width:100%;border:0;height:860px"&gt;&lt;/iframe&gt;
-              </code>
-            </div>
-
-            <!--
-              OPCIÓN: pega aquí tu iframe real.
-              <iframe src="https://lightwidget.com/widgets/XXXX.html" scrolling="no" allowtransparency="true"
-                style="width:100%;border:0;overflow:hidden;height:860px;"></iframe>
-            -->
-          </div>
+          <button class="burger" type="button" aria-label="Abrir menú" title="Menú" onclick="toggleMobileMenu()">☰</button>
         </div>
-      </div>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <div class="hairline"></div>
-
-  <!-- QUIÉNES SOMOS -->
-  <section id="quienes">
-    <div class="wrap">
-      <div class="block">
-        <div class="block-head">
-          <div>
-            <h2>Quiénes somos</h2>
-            <p>Hinchas conversando en serio, sin humo.</p>
-          </div>
-        </div>
-
-        <div class="block-body">
-          <p>
-            <strong style="color:#fff;">Tertulia Oro &amp; Cielo</strong> es un proyecto independiente de comunidad.
-            Hacemos noticias, análisis y conversación sobre Everton de Viña del Mar, con un enfoque directo, respetuoso
-            y pensado para la hinchada.
-          </p>
-          <p class="tiny">Proyecto de comunidad, no oficial.</p>
-        </div>
+  <main id="inicio">
+    <!-- HERO -->
+    <section class="hero" aria-label="Portada">
+      <div class="hero-bg" id="heroBg" aria-hidden="true">
+        <!-- Video: mejor compatibilidad con youtube-nocookie -->
+        <iframe
+          title="Video de fondo"
+          src="https://www.youtube-nocookie.com/embed/T3g5TTlU3fQ?autoplay=1&mute=1&loop=1&playlist=T3g5TTlU3fQ&controls=0&rel=0&modestbranding=1&playsinline=1"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
       </div>
-    </div>
-  </section>
 
-  <div class="hairline"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-shine" aria-hidden="true"></div>
 
-  <!-- EQUIPO -->
-  <section id="equipo">
-    <div class="wrap">
-      <div class="block">
-        <div class="block-head">
-          <div>
-            <h2>Equipo</h2>
-            <p>Personas detrás de la tertulia (nombres y fotos de ejemplo).</p>
-          </div>
+      <div class="container hero-content reveal">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> Viña del Mar • Debate • Pasión</div>
+        <h1><span class="h1-accent">Oro</span> &amp; Cielo</h1>
+        <p class="lead">
+          Comunidad ruletera para analizar, debatir y vivir Everton con identidad. Novedades, opinión y conversación como tiene que ser.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#novedades">Ver novedades</a>
+          <a class="btn" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Seguir en Instagram</a>
         </div>
 
-        <div class="block-body">
-          <div class="team-grid">
-            <!-- Fotos aleatorias (externas). Si quieres, las cambias por tus fotos reales. -->
-            <div class="member">
-              <div class="member-top">
-                <div class="avatar"><img alt="Foto equipo" src="https://i.pravatar.cc/120?img=12"></div>
-                <div>
-                  <b>Matías Rojas</b>
-                  <span>Conductor / Panel</span>
-                </div>
-              </div>
-              <span>Noticias del club y conversación en vivo.</span>
-            </div>
+        <div class="scroll-hint" aria-hidden="true"><span>Desliza</span><span class="chev"></span></div>
+      </div>
+    </section>
 
-            <div class="member">
-              <div class="member-top">
-                <div class="avatar"><img alt="Foto equipo" src="https://i.pravatar.cc/120?img=32"></div>
-                <div>
-                  <b>Camila Fuentes</b>
-                  <span>Producción / Contenido</span>
-                </div>
-              </div>
-              <span>Guión, pauta y coordinación de publicaciones.</span>
-            </div>
+    <div class="wave" aria-hidden="true"></div>
 
-            <div class="member">
-              <div class="member-top">
-                <div class="avatar"><img alt="Foto equipo" src="https://i.pravatar.cc/120?img=54"></div>
-                <div>
-                  <b>Diego Salazar</b>
-                  <span>Análisis / Datos</span>
-                </div>
-              </div>
-              <span>Lecturas tácticas, estadísticas y contexto.</span>
-            </div>
-
-            <div class="member">
-              <div class="member-top">
-                <div class="avatar"><img alt="Foto equipo" src="https://i.pravatar.cc/120?img=7"></div>
-                <div>
-                  <b>Valentina Muñoz</b>
-                  <span>RRSS / Comunidad</span>
-                </div>
-              </div>
-              <span>Moderación y vínculo con la hinchada.</span>
-            </div>
-          </div>
-
-          <p class="tiny" style="margin-top:12px;">
-            Nota: estas fotos son “placeholder”. Reemplázalas por imágenes reales cuando las tengas.
+    <!-- NOVEDADES -->
+    <section id="novedades" aria-label="Novedades">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title">Novedades Ruleteras</h2>
+          <p class="section-subtitle">
+            Últimos 12 posts del Instagram oficial (grid 3×12). Si no tienes backend aún, igual se verá bonito con fallback.
           </p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <div class="hairline"></div>
-
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <div class="wrap">
-      <div class="block">
-        <div class="block-head">
-          <div>
-            <h2>Contacto</h2>
-            <p>Colaboraciones, prensa, invitados y propuestas.</p>
-          </div>
-          <a class="btn btn-yellow" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener">
-            DM por Instagram
-          </a>
+        <div class="ig-grid reveal" id="igGrid" aria-live="polite" aria-busy="true">
+          <!-- Skeletons (12) -->
+          <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
+          <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
+          <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
+          <div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div><div class="ig-card skeleton" aria-hidden="true"></div>
         </div>
 
-        <div class="block-body">
-          <p>
-            Este formulario es demo. Si quieres envío real, puedes conectarlo a Formspree/Netlify Forms o un endpoint propio.
+        <div class="ig-error" id="igError">
+          No se pudo cargar el feed automático. Necesitas un endpoint <code>/api/instagram-feed</code>.
+          Mientras tanto:
+          <a class="btn btn-primary" style="margin-left:10px" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Abrir Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave" aria-hidden="true"></div>
+
+    <!-- QUIENES SOMOS -->
+    <section id="quienes" aria-label="Quiénes somos">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title">Quiénes Somos</h2>
+          <p class="section-subtitle">
+            Una tertulia con base en Viña del Mar. Opinión, respeto y pasión por Everton: lo que pasa en la cancha, se conversa acá.
           </p>
+        </div>
 
-          <form id="contactForm">
-            <div class="grid2">
-              <div>
-                <label for="name">Nombre</label>
-                <input id="name" name="name" type="text" placeholder="Tu nombre" required />
-              </div>
-              <div>
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="tu@email.com" required />
-              </div>
+        <div class="about-grid">
+          <article class="card reveal">
+            <h3 class="about-title">Nuestra esencia</h3>
+            <p class="about-text">
+              Tertulia Oro y Cielo nace para reunir a la familia evertoniana: analizar partidos, debatir decisiones, celebrar triunfos
+              y sostener el sentimiento en las buenas y en las difíciles. Sin humo: conversación con identidad ruletera.
+            </p>
+
+            <div class="pill-list" aria-label="Pilares">
+              <span class="pill">🧠 <b>Análisis</b> con criterio</span>
+              <span class="pill">🎙️ <b>Debate</b> con respeto</span>
+              <span class="pill">💛 <b>Pasión</b> Oro &amp; Cielo</span>
+              <span class="pill">📍 <b>Viña</b> como casa</span>
             </div>
-            <div>
-              <label for="message">Mensaje</label>
-              <textarea id="message" name="message" placeholder="Cuéntanos tu propuesta..." required></textarea>
+          </article>
+
+          <aside class="card reveal">
+            <h3 class="about-title">Lo que hacemos</h3>
+            <p class="about-text">
+              Resúmenes, opiniones, previas, post-partido y contenido para compartir. Este bloque queda listo para sumar “Programas”, “Invitados” o “Sponsors”.
+            </p>
+
+            <div class="stats" aria-label="Indicadores">
+              <div class="stat"><strong>+12</strong><span>posts destacados</span></div>
+              <div class="stat"><strong>1</strong><span>comunidad ruletera</span></div>
+              <div class="stat"><strong>100%</strong><span>identidad Oro &amp; Cielo</span></div>
+              <div class="stat"><strong>24/7</strong><span>Everton en la conversación</span></div>
             </div>
-            <button class="btn btn-yellow" type="submit">Enviar</button>
-            <div id="formStatus" class="tiny" style="margin-top:8px;"></div>
-          </form>
+          </aside>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div>© <span id="year"></span> Tertulia Oro &amp; Cielo</div>
-        <div>
-          <a href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener">Instagram</a>
-          <span style="margin-left:10px;">Proyecto independiente, no oficial</span>
+    <div class="wave" aria-hidden="true"></div>
+
+    <!-- PANEL -->
+    <section id="panel" class="panel" aria-label="Panel">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title">Panel Oro &amp; Cielo</h2>
+          <p class="section-subtitle">
+            Equipo completo con nombres y cargos. Si falta alguna foto en la carpeta, se mostrará un avatar de respaldo.
+          </p>
         </div>
+
+        <div class="panel-grid">
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/jonathan-gonzalez.webp" alt="Jonathan Gonzalez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Jonathan Gonzalez</h3><p>Director</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/marcos-guardia.webp" alt="Marcos Guardia" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Marcos Guardia</h3><p>Representante Legal</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/alejandra-pimentel.webp" alt="Alejandra Pimentel" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Alejandra Pimentel</h3><p>Conductora, Panelista y Periodista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/alonso-aravena.webp" alt="Alonso Aravena" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Alonso Aravena</h3><p>Diseñador Gráfico</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/constanza-guardia.webp" alt="Constanza Guardia" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Constanza Guardia</h3><p>Moderadora 1</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/alejandra-rivera.webp" alt="Alejandra Rivera" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Alejandra Rivera</h3><p>Moderadora 2</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/macarena-molina.webp" alt="Macarena Molina" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Macarena Molina</h3><p>Moderadora 3</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/victor-arancibia.webp" alt="Victor Arancibia" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Victor Arancibia</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/jaime-hernandez.webp" alt="Jaime Hernandez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Jaime Hernandez</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/paulina-moreno.webp" alt="Paulina Moreno" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Paulina Moreno</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/claudio-ibanez.webp" alt="Claudio Ibañez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Claudio Ibañez</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/macarena-gonzalez.webp" alt="Macarena Gonzalez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Macarena Gonzalez</h3><p>Conductor y Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/diego-veliz.webp" alt="Diego Veliz" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Diego Veliz</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/bastian-campos.webp" alt="Bastian Campos" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Bastian Campos</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/camila-diaz.webp" alt="Camila Diaz" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Camila Diaz</h3><p>Reportera Gráfica</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/daniel-nunez.webp" alt="Daniel Nuñez" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Daniel Nuñez</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/esteban-cid.webp" alt="Esteban Cid" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Esteban Cid</h3><p>Panelista</p></div>
+          </article>
+
+          <article class="member reveal">
+            <div class="avatar">
+              <img src="/assets/img/panel/daniela-diaz.webp" alt="Daniela Diaz" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+            </div>
+            <div class="member-body"><h3>Daniela Diaz</h3><p>Panelista</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="contacto" aria-label="Contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="reveal">
+          <h2 class="footer-title">Contacto</h2>
+          <p class="footer-note">
+            ¿Colaboraciones, entrevistas o sponsors? Escríbenos y coordinamos.
+          </p>
+          <p class="footer-note" style="margin-top:10px;">
+            Instagram:
+            <a href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" style="color: var(--oro-500); font-weight:900;">
+              @tertulia_oroycielo
+            </a>
+          </p>
+        </div>
+
+        <form class="form reveal" id="contactForm">
+          <div class="field">
+            <label for="name">Nombre completo</label>
+            <input id="name" name="name" type="text" placeholder="Tu nombre" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" placeholder="tunombre@correo.com" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" placeholder="Cuéntanos algo, ruletero..." required></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+          <small style="color: rgba(255,255,255,.66); font-weight:650; line-height:1.4;">
+            * Form listo para conectar con backend (o Formspree/EmailJS). Ahora solo valida y muestra feedback.
+          </small>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <span id="copyright"></span>
+        <span>Azul manda, Oro brilla ✦</span>
       </div>
     </div>
   </footer>
 
   <script>
-    // =========================
-    // PARTIDOS (API)
-    // =========================
-    const SPORTSDB_API_KEY = "1";      // demo key (para pruebas)
-    const TEAM_ID = "137729";          // Everton de Viña del Mar
-    const CACHE_KEY = "tertulia_matches_cache_v1";
-    const CACHE_TTL_MS = 1000 * 60 * 30; // 30 min
+    // Avatar fallback (data-uri SVG) si falta alguna foto
+    window.__avatarFallback =
+      "data:image/svg+xml;charset=utf-8," +
+      encodeURIComponent(`
+        <svg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 64 64'>
+          <defs>
+            <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+              <stop offset='0' stop-color='#0a2b4c'/>
+              <stop offset='1' stop-color='#061a2d'/>
+            </linearGradient>
+            <radialGradient id='gold' cx='0.2' cy='0.1' r='0.8'>
+              <stop offset='0' stop-color='#f6c400' stop-opacity='0.35'/>
+              <stop offset='1' stop-color='#f6c400' stop-opacity='0'/>
+            </radialGradient>
+          </defs>
+          <rect width='64' height='64' fill='url(#bg)'/>
+          <rect width='64' height='64' fill='url(#gold)'/>
+          <circle cx='32' cy='24' r='11' fill='rgba(255,255,255,0.90)'/>
+          <path d='M12 60c3-13 12-20 20-20s17 7 20 20' fill='none' stroke='rgba(255,255,255,0.90)' stroke-width='6' stroke-linecap='round'/>
+        </svg>
+      `);
 
-    const $ = (id) => document.getElementById(id);
+    // Header effect on scroll
+    (function(){
+      const header = document.getElementById("header");
+      const onScroll = () => header?.classList.toggle("is-scrolled", (window.scrollY || 0) > 10);
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    })();
 
-    function fmtDate(isoDate){
-      if (!isoDate) return "Fecha por confirmar";
-      const [y,m,d] = isoDate.split("-").map(Number);
-      const dt = new Date(y, (m-1), d);
-      return dt.toLocaleDateString("es-CL", { weekday:"short", day:"2-digit", month:"short", year:"numeric" });
+    // Mobile menu
+    function toggleMobileMenu(){
+      const links = document.getElementById("navLinks");
+      if(!links) return;
+
+      const isOpen = links.style.display === "flex";
+      links.style.display = isOpen ? "none" : "flex";
+      links.style.flexDirection = "column";
+      links.style.position = "absolute";
+      links.style.top = "64px";
+      links.style.right = "16px";
+      links.style.padding = "10px";
+      links.style.background = "rgba(6,26,45,.92)";
+      links.style.border = "1px solid rgba(255,255,255,.14)";
+      links.style.borderRadius = "16px";
+      links.style.backdropFilter = "blur(12px)";
+      links.style.minWidth = "240px";
     }
+    window.toggleMobileMenu = toggleMobileMenu;
 
-    function safeText(v, fallback="—"){ return (v && String(v).trim()) ? String(v).trim() : fallback; }
+    // Hero parallax (movement on scroll)
+    (function(){
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(prefersReduced) return;
 
-    async function fetchJSON(url, timeoutMs=9000){
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      const bg = document.getElementById("heroBg");
+      if(!bg) return;
+
+      let ticking = false;
+      const onScroll = () => {
+        if(ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY || 0;
+          bg.style.transform = `translate3d(0, ${Math.min(y * 0.085, 70)}px, 0) scale(1.08)`;
+          ticking = false;
+        });
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    })();
+
+    // Reveal on scroll
+    (function(){
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(prefersReduced){
+        document.querySelectorAll(".reveal").forEach(el => el.classList.add("is-in"));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    })();
+
+    // Instagram Feed (3x12) — requiere backend opcional:
+    // GET /api/instagram-feed?limit=12
+    // { "data": [ { "media_url":"...", "permalink":"...", "caption":"...", "timestamp":"..." } ] }
+    async function loadInstagram(limit = 12){
+      const grid = document.getElementById("igGrid");
+      const errorBox = document.getElementById("igError");
+      if(!grid) return;
+
       try{
-        const r = await fetch(url, { signal: controller.signal, cache: "no-store" });
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return await r.json();
-      } finally {
-        clearTimeout(timer);
+        const res = await fetch(`/api/instagram-feed?limit=${encodeURIComponent(limit)}`, { cache: "no-store" });
+        if(!res.ok) throw new Error("HTTP " + res.status);
+
+        const json = await res.json();
+        const items = (json && Array.isArray(json.data)) ? json.data.slice(0, limit) : [];
+        if(items.length === 0) throw new Error("No data");
+
+        grid.setAttribute("aria-busy", "false");
+        grid.innerHTML = items.map((it) => {
+          const url = it.media_url || it.thumbnail_url || "";
+          const link = it.permalink || "https://www.instagram.com/tertulia_oroycielo/";
+          const caption = (it.caption || "Ver post en Instagram").trim();
+          const date = it.timestamp ? new Date(it.timestamp).toLocaleDateString("es-CL", { year:"numeric", month:"short", day:"2-digit" }) : "";
+
+          return `
+            <a class="ig-card" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir post en Instagram">
+              <img class="ig-media" src="${escapeHtml(url)}" alt="${escapeHtml(caption)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__avatarFallback;">
+              <div class="ig-gradient" aria-hidden="true"></div>
+              <div class="ig-meta">
+                <small>${escapeHtml(date)}</small>
+                <p>${escapeHtml(caption)}</p>
+              </div>
+            </a>
+          `;
+        }).join("");
+
+      }catch(err){
+        grid.setAttribute("aria-busy", "false");
+        if(errorBox) errorBox.style.display = "block";
+
+        // Fallback: 12 cards que llevan al Instagram
+        const fallback = Array.from({ length: 12 }).map((_, i) => `
+          <a class="ig-card" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram">
+            <img class="ig-media" src="${window.__avatarFallback}" alt="Instagram Tertulia Oro y Cielo" loading="lazy" decoding="async">
+            <div class="ig-gradient" aria-hidden="true"></div>
+            <div class="ig-meta">
+              <small>Instagram</small>
+              <p>@tertulia_oroycielo — Ver publicaciones</p>
+            </div>
+          </a>
+        `).join("");
+        grid.innerHTML = fallback;
+
+        console.warn("IG feed error:", err);
       }
     }
 
-    function setStatus(msg){ $("dataStatus").textContent = msg; }
-
-    function renderHeroCards(last, next){
-      const lastCard = $("lastMatchCard");
-      const nextCard = $("nextMatchCard");
-
-      const lastOne = (last && last.length) ? last[0] : null;
-      const nextOne = (next && next.length) ? next[0] : null;
-
-      // LAST
-      if (lastOne){
-        const meta = fmtDate(lastOne.dateEvent);
-        const score = (lastOne.intHomeScore != null && lastOne.intAwayScore != null)
-          ? `${lastOne.intHomeScore} - ${lastOne.intAwayScore}` : "—";
-
-        lastCard.querySelectorAll(".team span")[0].textContent = meta;
-        lastCard.querySelector(".score").textContent = score;
-
-        lastCard.querySelectorAll(".team b")[1].textContent = safeText(lastOne.strAwayTeam, "Rival");
-        lastCard.querySelectorAll(".team span")[1].textContent = safeText(lastOne.strHomeTeam, "Everton");
-      } else {
-        lastCard.querySelectorAll(".team span")[0].textContent = "Sin datos por ahora";
-        lastCard.querySelector(".score").textContent = "—";
-      }
-
-      // NEXT
-      if (nextOne){
-        const meta = fmtDate(nextOne.dateEvent);
-        nextCard.querySelectorAll(".team span")[0].textContent = meta;
-        nextCard.querySelector(".score").textContent = "VS";
-
-        nextCard.querySelectorAll(".team b")[1].textContent = safeText(nextOne.strAwayTeam, "Rival");
-        nextCard.querySelectorAll(".team span")[1].textContent = safeText(nextOne.strHomeTeam, "Everton");
-      } else {
-        nextCard.querySelectorAll(".team span")[0].textContent = "Por confirmar";
-        nextCard.querySelector(".score").textContent = "VS";
-      }
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
 
-    function row(container, ev, type){
-      // type: "last" | "next"
-      const div = document.createElement("div");
-      div.className = "rowm";
+    loadInstagram(12);
 
-      const meta = fmtDate(ev.dateEvent);
-      const home = safeText(ev.strHomeTeam, "Local");
-      const away = safeText(ev.strAwayTeam, "Visita");
-
-      let right = "—";
-      if (type === "last" && ev.intHomeScore != null && ev.intAwayScore != null){
-        right = `${ev.intHomeScore}-${ev.intAwayScore}`;
-      } else if (type === "next"){
-        right = "Programado";
-      }
-
-      div.innerHTML = `
-        <div class="left">
-          <b>${home} vs ${away}</b>
-          <span>${meta}</span>
-        </div>
-        <div class="pill">${right}</div>
-      `;
-      container.appendChild(div);
-    }
-
-    function renderLists(last, next){
-      const last5 = $("last5");
-      const next5 = $("next5");
-      last5.innerHTML = "";
-      next5.innerHTML = "";
-
-      const lastSlice = (last || []).slice(0, 5);
-      const nextSlice = (next || []).slice(0, 5);
-
-      if (!lastSlice.length){
-        last5.innerHTML = `<div class="tiny">No hay resultados disponibles.</div>`;
-      } else {
-        lastSlice.forEach(ev => row(last5, ev, "last"));
-      }
-
-      if (!nextSlice.length){
-        next5.innerHTML = `<div class="tiny">No hay próximos partidos publicados.</div>`;
-      } else {
-        nextSlice.forEach(ev => row(next5, ev, "next"));
-      }
-    }
-
-    function saveCache(data){
-      try{
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
-      } catch(e){}
-    }
-
-    function loadCache(){
-      try{
-        const raw = localStorage.getItem(CACHE_KEY);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        if (!parsed || !parsed.data) return null;
-        return parsed;
-      } catch(e){
-        return null;
-      }
-    }
-
-    async function loadMatches(){
-      setStatus("Cargando partidos…");
-
-      const base = `https://www.thesportsdb.com/api/v1/json/${encodeURIComponent(SPORTSDB_API_KEY)}`;
-      const lastUrl = `${base}/eventslast.php?id=${encodeURIComponent(TEAM_ID)}`;
-      const nextUrl = `${base}/eventsnext.php?id=${encodeURIComponent(TEAM_ID)}`;
-
-      // Si falla, mostramos cache
-      try{
-        const [last, next] = await Promise.all([fetchJSON(lastUrl), fetchJSON(nextUrl)]);
-        const data = {
-          last: (last && last.results) ? last.results : [],
-          next: (next && next.events) ? next.events : []
-        };
-
-        saveCache(data);
-        renderHeroCards(data.last, data.next);
-        renderLists(data.last, data.next);
-
-        setStatus("Partidos cargados (API).");
-      } catch(err){
-        console.warn("API error:", err);
-
-        const cached = loadCache();
-        if (cached && cached.data){
-          renderHeroCards(cached.data.last, cached.data.next);
-          renderLists(cached.data.last, cached.data.next);
-
-          const age = Date.now() - cached.ts;
-          const mins = Math.max(1, Math.round(age / 60000));
-          setStatus(`No se pudo cargar la API. Mostrando último cache (hace ${mins} min).`);
-        } else {
-          setStatus("No se pudo cargar la API y no hay cache. Sube el HTML a un dominio (http/https) y reintenta.");
-          $("last5").innerHTML = `<div class="tiny">Error cargando datos.</div>`;
-          $("next5").innerHTML = `<div class="tiny">Error cargando datos.</div>`;
-        }
-      }
-    }
-
-    // =========================
-    // CONTACT FORM (demo)
-    // =========================
-    const form = document.getElementById("contactForm");
-    const formStatus = document.getElementById("formStatus");
-    form.addEventListener("submit", (e) => {
+    // Contact form demo (no envío real)
+    document.getElementById("contactForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
-      formStatus.textContent = "Mensaje listo. Conecta este formulario a Formspree/Netlify Forms o tu backend para envío real.";
-      form.reset();
+      const name = document.getElementById("name")?.value?.trim();
+      const email = document.getElementById("email")?.value?.trim();
+      const msg = document.getElementById("message")?.value?.trim();
+      if(!name || !email || !msg) return;
+      alert("Mensaje listo ✅\nConecta este form a tu backend (o Formspree/EmailJS) para envío real.");
+      e.target.reset();
     });
 
-    // Init
-    document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("refreshBtn").addEventListener("click", loadMatches);
-    loadMatches();
+    // Footer year
+    (function(){
+      const year = new Date().getFullYear();
+      const el = document.getElementById("copyright");
+      if(el) el.textContent = `Tertulia Oro y Cielo © ${year} — Hinchas de Everton de Viña del Mar`;
+    })();
   </script>
 </body>
 </html>
