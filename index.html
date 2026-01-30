@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ✅ GitHub Pages base path (ajústalo si cambia el repo) -->
-  <base href="/TertuliaOro-Cielo/">
+  <!-- ✅ Base universal: funciona en GitHub Pages (subcarpeta) y en Vultr (raíz) -->
+  <base href="./">
 
   <title>Tertulia Oro y Cielo | Hinchas de Everton</title>
   <meta name="description" content="Tertulia Oro y Cielo: análisis, debate y pasión ruletera. Novedades, panel y contenido para la familia evertoniana." />
@@ -31,17 +31,14 @@
     :root{
       --azul-950:#04101f;
       --azul-900:#061a2d;
-      --azul-850:#071f36;
       --azul-800:#07213a;
       --azul-700:#0a2b4c;
 
       --oro-500:#f6c400;
-      --oro-450:#ffcf33;
       --oro-400:#ffd75a;
 
       --text:#ffffff;
       --muted:rgba(255,255,255,.74);
-      --card: rgba(255,255,255,.06);
       --stroke: rgba(255,255,255,.12);
       --shadow: 0 18px 70px rgba(0,0,0,.45);
 
@@ -83,7 +80,6 @@
       margin:0 auto;
     }
 
-    /* Subtle pattern */
     .bg-pattern{
       position:fixed;
       inset:0;
@@ -226,7 +222,6 @@
       border:0;
     }
 
-    /* Overlay “broadcast” */
     .hero-overlay{
       position:absolute;
       inset:0;
@@ -237,7 +232,6 @@
         linear-gradient(180deg, rgba(6,26,45,.08), rgba(6,26,45,.82));
     }
 
-    /* Shine + vignette */
     .hero-shine{
       position:absolute;
       inset:auto -20% -40% -20%;
@@ -248,7 +242,6 @@
       pointer-events:none;
     }
 
-    /* Fallback (si el video no carga) */
     .hero-fallback{
       position:absolute;
       inset:0;
@@ -329,11 +322,11 @@
 
     .lead{
       margin: 0 auto;
-      max-width: 820px;
+      max-width: 920px;
       font-size: clamp(1rem, 2.2vw, 1.35rem);
       color: var(--muted);
       font-weight:700;
-      line-height: 1.58;
+      line-height: 1.6;
     }
 
     .hero-actions{
@@ -366,7 +359,6 @@
       50%{ transform: rotate(45deg) translate(0,6px); opacity:1; }
     }
 
-    /* Sections */
     section{ padding: var(--s7) 0; }
     .section-head{
       text-align:center;
@@ -400,7 +392,6 @@
       margin: 0;
     }
 
-    /* Instagram grid */
     .ig-grid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -418,7 +409,6 @@
       box-shadow: var(--shadow);
       aspect-ratio: 1/1;
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      transform: translateY(0);
     }
     .ig-card:hover{
       transform: translateY(-5px);
@@ -487,17 +477,12 @@
       display:none;
     }
 
-    /* Quienes somos */
-    .about-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    @media (max-width: 920px){ .about-grid{ grid-template-columns: 1fr; } }
+    /* About / Panel / Footer (compact, pro) */
+    .about-grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; }
+    @media (max-width:920px){ .about-grid{ grid-template-columns:1fr; } }
 
     .card{
-      border: 1px solid var(--stroke);
+      border:1px solid var(--stroke);
       background: rgba(255,255,255,.06);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -507,100 +492,45 @@
     }
     .card::before{
       content:"";
-      position:absolute;
-      inset: -2px;
+      position:absolute; inset:-2px;
       background: radial-gradient(520px 260px at 20% 10%, rgba(246,196,0,.12), transparent 60%);
       pointer-events:none;
       opacity:.9;
     }
     .card > *{ position:relative; z-index:1; }
 
-    .about-title{
-      margin: 0 0 10px;
-      font-weight: 900;
-      letter-spacing:.05em;
-      text-transform: uppercase;
-      font-size: 1.05rem;
-      color: rgba(255,255,255,.92);
-    }
-    .about-text{
-      margin:0;
-      color: rgba(255,255,255,.80);
-      font-weight: 700;
-      line-height:1.7;
-    }
+    .about-title{ margin:0 0 10px; font-weight:900; letter-spacing:.05em; text-transform:uppercase; font-size:1.05rem; }
+    .about-text{ margin:0; color: rgba(255,255,255,.80); font-weight:700; line-height:1.7; }
 
-    .pill-list{
-      margin-top: 14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-    }
+    .pill-list{ margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; }
     .pill{
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
+      padding:10px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      font-weight: 900;
-      color: rgba(255,255,255,.88);
-      letter-spacing:.02em;
-      display:inline-flex;
-      gap: 8px;
-      align-items:center;
+      font-weight:900; color: rgba(255,255,255,.88);
+      display:inline-flex; gap:8px; align-items:center;
     }
     .pill b{ color: var(--oro-500); }
 
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 14px;
-    }
-    .stat{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: 16px;
-      padding: 14px;
-    }
-    .stat strong{
-      display:block;
-      font-size: 1.5rem;
-      letter-spacing:.02em;
-      color: var(--oro-500);
-      font-weight: 900;
-    }
-    .stat span{
-      display:block;
-      color: rgba(255,255,255,.78);
-      font-weight: 900;
-      margin-top: 4px;
-    }
+    .stats{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; margin-top:14px; }
+    .stat{ border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); border-radius:16px; padding:14px; }
+    .stat strong{ display:block; font-size:1.5rem; color: var(--oro-500); font-weight:900; }
+    .stat span{ display:block; color: rgba(255,255,255,.78); font-weight:900; margin-top:4px; }
 
-    /* Panel */
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
-    }
-    .panel-grid{
-      display:grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 14px;
-    }
-    @media (max-width: 1100px){ .panel-grid{ grid-template-columns: repeat(3, 1fr);} }
-    @media (max-width: 720px){ .panel-grid{ grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 430px){ .panel-grid{ grid-template-columns: 1fr;} }
+    .panel-grid{ display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap:14px; }
+    @media (max-width:1100px){ .panel-grid{ grid-template-columns:repeat(3,1fr);} }
+    @media (max-width:720px){ .panel-grid{ grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:430px){ .panel-grid{ grid-template-columns:1fr;} }
 
     .member{
-      border: 1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       border-radius: var(--radius);
       overflow:hidden;
       box-shadow: var(--shadow);
       transition: transform .18s ease, border-color .18s ease;
     }
-    .member:hover{
-      transform: translateY(-4px);
-      border-color: rgba(246,196,0,.35);
-    }
+    .member:hover{ transform: translateY(-4px); border-color: rgba(246,196,0,.35); }
 
     .avatar{
       aspect-ratio: 1/1;
@@ -610,109 +540,46 @@
         radial-gradient(300px 220px at 20% 10%, rgba(246,196,0,.18), transparent 60%),
         linear-gradient(135deg, rgba(10,43,76,.85), rgba(6,26,45,.85));
     }
-    .avatar img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display:block;
-    }
+    .avatar img{ width:100%; height:100%; object-fit:cover; object-position:center top; }
 
-    .member-body{
-      padding: 14px 14px 16px;
-    }
-    .member-body h3{
-      margin:0 0 6px;
-      font-size: .98rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing:.03em;
-      color: rgba(255,255,255,.92);
-    }
-    .member-body p{
-      margin:0;
-      color: rgba(255,255,255,.78);
-      font-weight: 900;
-      line-height: 1.45;
-    }
+    .member-body{ padding:14px 14px 16px; }
+    .member-body h3{ margin:0 0 6px; font-size:.98rem; font-weight:900; text-transform:uppercase; letter-spacing:.03em; }
+    .member-body p{ margin:0; color: rgba(255,255,255,.78); font-weight:900; line-height:1.45; }
 
-    /* Footer */
     footer{
       background: linear-gradient(180deg, rgba(6,26,45,.85), rgba(4,16,31,.95));
       border-top: 5px solid var(--oro-500);
       padding: var(--s7) 0;
     }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 22px;
-      align-items:start;
-    }
-    @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr; } }
-
-    .footer-title{
-      margin:0 0 10px;
-      font-weight: 900;
-      letter-spacing:.08em;
-      text-transform: uppercase;
-    }
-    .footer-note{
-      margin:0;
-      color: rgba(255,255,255,.74);
-      font-weight: 700;
-      line-height: 1.65;
-    }
-
-    .form{ display:grid; gap: 12px; margin-top: 12px; }
-    .field{ display:grid; gap: 6px; }
-    label{
-      font-size: 13px;
-      color: rgba(255,255,255,.82);
-      font-weight: 900;
-      letter-spacing:.02em;
-    }
+    .footer-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:22px; }
+    @media (max-width:860px){ .footer-grid{ grid-template-columns:1fr; } }
+    .footer-title{ margin:0 0 10px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .footer-note{ margin:0; color: rgba(255,255,255,.74); font-weight:700; line-height:1.65; }
+    .form{ display:grid; gap:12px; margin-top:12px; }
+    .field{ display:grid; gap:6px; }
+    label{ font-size:13px; color: rgba(255,255,255,.82); font-weight:900; }
     input, textarea{
-      width:100%;
-      padding: 14px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
+      width:100%; padding:14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
       color:#fff;
-      outline:none;
-      transition: border-color .2s ease, background .2s ease;
     }
-    input:focus, textarea:focus{
-      border-color: rgba(246,196,0,.55);
-      background: rgba(0,0,0,.28);
-    }
-    textarea{ resize: vertical; min-height: 110px; }
+    input:focus, textarea:focus{ border-color: rgba(246,196,0,.55); background: rgba(0,0,0,.28); }
+    textarea{ resize: vertical; min-height:110px; }
 
     .footer-bottom{
-      margin-top: 28px;
-      padding-top: 18px;
+      margin-top: 28px; padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,.12);
       color: rgba(255,255,255,.62);
       font-weight: 900;
       font-size: 13px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      justify-content: space-between;
-      align-items:center;
+      display:flex; flex-wrap:wrap; gap:10px;
+      justify-content: space-between; align-items:center;
     }
 
-    /* Reveal */
-    .reveal{
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .55s ease, transform .55s ease;
-    }
-    .reveal.is-in{
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal{ opacity:0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.is-in{ opacity:1; transform: translateY(0); }
 
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .chev{ animation:none; }
       .btn, .member, .ig-card, .ig-media{ transition:none; }
@@ -729,7 +596,7 @@
     <div class="container">
       <nav class="nav">
         <a class="brand" href="#inicio" aria-label="Ir al inicio">
-          <img class="brand-logo" src="assets/img/Logos/logo_tertulia_320_opt.png" alt="Tertulia Oro y Cielo">
+          <img class="brand-logo" id="brandLogo" src="assets/img/Logos/logo_tertulia_320_opt.png" alt="Tertulia Oro y Cielo">
           <span class="brand-text">Tertulia <span>Oro y Cielo</span></span>
         </a>
 
@@ -741,11 +608,8 @@
         </div>
 
         <div class="nav-cta">
-          <a class="btn" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">
-            Instagram
-          </a>
+          <a class="btn" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a class="btn btn-primary" href="#contacto">Hablemos</a>
-
           <button class="burger" type="button" aria-label="Abrir menú" title="Menú" onclick="toggleMobileMenu()">☰</button>
         </div>
       </nav>
@@ -769,28 +633,18 @@
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-shine" aria-hidden="true"></div>
 
-      <!-- ✅ Fallback si el video no carga / bloqueado -->
       <div class="hero-fallback" id="heroFallback" aria-hidden="true">
         <div class="fallback-box">
-          <div class="kicker" style="justify-content:center;">
-            <span class="dot" aria-hidden="true"></span> Banner en modo seguro
-          </div>
-          <p>
-            Tu navegador/AdBlock o YouTube puede bloquear el video embebido.
-            Igual puedes verlo directamente.
-          </p>
-          <a class="btn btn-primary" href="https://www.youtube.com/watch?v=T3g5TTlU3fQ" target="_blank" rel="noopener">
-            Ver video en YouTube
-          </a>
+          <div class="kicker" style="justify-content:center;"><span class="dot" aria-hidden="true"></span> Banner en modo seguro</div>
+          <p>Tu navegador/AdBlock o YouTube puede bloquear el video embebido. Igual puedes verlo directo.</p>
+          <a class="btn btn-primary" href="https://www.youtube.com/watch?v=T3g5TTlU3fQ" target="_blank" rel="noopener">Ver video en YouTube</a>
         </div>
       </div>
 
       <div class="container hero-content reveal">
         <div class="kicker"><span class="dot" aria-hidden="true"></span> Viña del Mar • Debate • Pasión</div>
         <h1><span class="h1-accent">Oro</span> &amp; Cielo</h1>
-        <p class="lead">
-          Comunidad ruletera para analizar, debatir y vivir Everton con identidad. Novedades, opinión y conversación como tiene que ser.
-        </p>
+        <p class="lead">Comunidad ruletera para analizar, debatir y vivir Everton con identidad. Novedades, opinión y conversación como tiene que ser.</p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="#novedades">Ver novedades</a>
@@ -808,10 +662,7 @@
       <div class="container">
         <div class="section-head reveal">
           <h2 class="section-title">Novedades Ruleteras</h2>
-          <p class="section-subtitle">
-            En GitHub Pages no hay backend, así que se muestra un fallback bonito.
-            En tu Vultr puedes activar <code>/api/instagram-feed</code> para que cargue automático.
-          </p>
+          <p class="section-subtitle">En GitHub Pages se mostrará un fallback. En Vultr puedes activar <code>/api/instagram-feed</code> para feed real.</p>
         </div>
 
         <div class="ig-grid reveal" id="igGrid" aria-live="polite" aria-busy="true">
@@ -822,7 +673,7 @@
         </div>
 
         <div class="ig-error" id="igError">
-          No se pudo cargar el feed automático. Mientras tanto:
+          No se pudo cargar el feed automático.
           <a class="btn btn-primary" style="margin-left:10px" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Abrir Instagram</a>
         </div>
       </div>
@@ -835,20 +686,15 @@
       <div class="container">
         <div class="section-head reveal">
           <h2 class="section-title">Quiénes Somos</h2>
-          <p class="section-subtitle">
-            Una tertulia con base en Viña del Mar. Opinión, respeto y pasión por Everton: lo que pasa en la cancha, se conversa acá.
-          </p>
+          <p class="section-subtitle">Una tertulia con base en Viña del Mar. Opinión, respeto y pasión por Everton: lo que pasa en la cancha, se conversa acá.</p>
         </div>
 
         <div class="about-grid">
           <article class="card reveal">
             <h3 class="about-title">Nuestra esencia</h3>
-            <p class="about-text">
-              Tertulia Oro y Cielo nace para reunir a la familia evertoniana: analizar partidos, debatir decisiones, celebrar triunfos
-              y sostener el sentimiento en las buenas y en las difíciles. Conversación con identidad ruletera.
-            </p>
+            <p class="about-text">Tertulia Oro y Cielo nace para reunir a la familia evertoniana: analizar partidos, debatir decisiones, celebrar triunfos y sostener el sentimiento. Conversación con identidad ruletera.</p>
 
-            <div class="pill-list" aria-label="Pilares">
+            <div class="pill-list">
               <span class="pill">🧠 <b>Análisis</b> con criterio</span>
               <span class="pill">🎙️ <b>Debate</b> con respeto</span>
               <span class="pill">💛 <b>Pasión</b> Oro &amp; Cielo</span>
@@ -858,12 +704,9 @@
 
           <aside class="card reveal">
             <h3 class="about-title">Lo que hacemos</h3>
-            <p class="about-text">
-              Resúmenes, opiniones, previas, post-partido y contenido para compartir.
-              Este bloque queda listo para sumar “Programas”, “Invitados” o “Sponsors”.
-            </p>
+            <p class="about-text">Resúmenes, opiniones, previas, post-partido y contenido para compartir. Este bloque queda listo para sumar “Programas”, “Invitados” o “Sponsors”.</p>
 
-            <div class="stats" aria-label="Indicadores">
+            <div class="stats">
               <div class="stat"><strong>+12</strong><span>posts destacados</span></div>
               <div class="stat"><strong>1</strong><span>comunidad ruletera</span></div>
               <div class="stat"><strong>100%</strong><span>identidad Oro &amp; Cielo</span></div>
@@ -877,17 +720,14 @@
     <div class="wave" aria-hidden="true"></div>
 
     <!-- PANEL -->
-    <section id="panel" class="panel" aria-label="Panel">
+    <section id="panel" aria-label="Panel">
       <div class="container">
         <div class="section-head reveal">
           <h2 class="section-title">Panel Oro &amp; Cielo</h2>
-          <p class="section-subtitle">
-            Equipo completo con nombres y cargos.
-          </p>
+          <p class="section-subtitle">Equipo completo con nombres y cargos.</p>
         </div>
 
         <div class="panel-grid">
-          <!-- helper: onerror fallback -->
           <article class="member reveal"><div class="avatar"><img src="assets/img/panel/jonathan-gonzalez.webp" alt="Jonathan Gonzalez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jonathan Gonzalez</h3><p>Director</p></div></article>
           <article class="member reveal"><div class="avatar"><img src="assets/img/panel/marcos-guardia.webp" alt="Marcos Guardia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Marcos Guardia</h3><p>Representante Legal</p></div></article>
           <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alejandra-pimentel.webp" alt="Alejandra Pimentel" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Pimentel</h3><p>Conductora, Panelista y Periodista</p></div></article>
@@ -911,7 +751,6 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer id="contacto" aria-label="Contacto">
     <div class="container">
       <div class="footer-grid">
@@ -943,9 +782,6 @@
           </div>
 
           <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-          <small style="color: rgba(255,255,255,.66); font-weight:700; line-height:1.45;">
-            * Form listo para conectar con backend (o Formspree/EmailJS).
-          </small>
         </form>
       </div>
 
@@ -957,9 +793,7 @@
   </footer>
 
   <script>
-    // ---------------------------
-    // Fallback avatar (data-uri SVG)
-    // ---------------------------
+    // Avatar fallback (SVG)
     const AVATAR_FALLBACK =
       "data:image/svg+xml;charset=utf-8," +
       encodeURIComponent(`
@@ -981,16 +815,13 @@
         </svg>
       `);
 
-    // Exponer para onerror
     function imgFallback(img){
       img.onerror = null;
       img.src = AVATAR_FALLBACK;
     }
     window.imgFallback = imgFallback;
 
-    // ---------------------------
-    // Header effect on scroll
-    // ---------------------------
+    // Header scroll
     (function(){
       const header = document.getElementById("header");
       const onScroll = () => header?.classList.toggle("is-scrolled", (window.scrollY || 0) > 10);
@@ -998,9 +829,7 @@
       onScroll();
     })();
 
-    // ---------------------------
     // Mobile menu
-    // ---------------------------
     function toggleMobileMenu(){
       const links = document.getElementById("navLinks");
       if(!links) return;
@@ -1020,33 +849,7 @@
     }
     window.toggleMobileMenu = toggleMobileMenu;
 
-    // ---------------------------
-    // Hero parallax
-    // ---------------------------
-    (function(){
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if(prefersReduced) return;
-
-      const bg = document.getElementById("heroBg");
-      if(!bg) return;
-
-      let ticking = false;
-      const onScroll = () => {
-        if(ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const y = window.scrollY || 0;
-          bg.style.transform = `translate3d(0, ${Math.min(y * 0.085, 70)}px, 0) scale(1.08)`;
-          ticking = false;
-        });
-      };
-      window.addEventListener("scroll", onScroll, { passive:true });
-      onScroll();
-    })();
-
-    // ---------------------------
-    // Reveal on scroll
-    // ---------------------------
+    // Reveal
     (function(){
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if(prefersReduced){
@@ -1065,36 +868,63 @@
       document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     })();
 
-    // ---------------------------
-    // Hero video fallback detection
-    // (No podemos detectar "play", pero sí detectar bloqueos frecuentes)
-    // ---------------------------
+    // Hero parallax
+    (function(){
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(prefersReduced) return;
+      const bg = document.getElementById("heroBg");
+      if(!bg) return;
+      let ticking = false;
+      const onScroll = () => {
+        if(ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY || 0;
+          bg.style.transform = `translate3d(0, ${Math.min(y * 0.085, 70)}px, 0) scale(1.08)`;
+          ticking = false;
+        });
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    })();
+
+    // Hero video fallback
     (function(){
       const fallback = document.getElementById("heroFallback");
       const iframe = document.getElementById("heroIframe");
       if(!fallback || !iframe) return;
-
-      // Si hay bloqueos por extensions/csp, normalmente queda en blanco.
-      // Mostramos fallback a los 2500ms, y lo escondemos si el iframe dispara load.
       let loaded = false;
-
-      iframe.addEventListener("load", () => {
-        loaded = true;
-        // No ocultamos automáticamente para evitar “flicker” en navegadores lentos.
-        // Si quieres ocultarlo siempre al load, descomenta:
-        // fallback.style.display = "none";
-      });
-
-      setTimeout(() => {
-        if(!loaded){
-          fallback.style.display = "flex";
-        }
-      }, 2500);
+      iframe.addEventListener("load", () => { loaded = true; });
+      setTimeout(() => { if(!loaded) fallback.style.display = "flex"; }, 2500);
     })();
 
-    // ---------------------------
-    // Instagram Feed (3x12) — intenta endpoint, si falla usa fallback
-    // ---------------------------
+    // ✅ Logo robusto: intenta Logos/ y logos/ (por si tu carpeta está en minúscula)
+    (function(){
+      const logo = document.getElementById("brandLogo");
+      if(!logo) return;
+
+      const candidates = [
+        "assets/img/Logos/logo_tertulia_320_opt.png",
+        "assets/img/logos/logo_tertulia_320_opt.png",
+        "assets/img/Logos/logo_tertulia_32.png",
+        "assets/img/logos/logo_tertulia_32.png"
+      ];
+
+      let i = 0;
+      const tryNext = () => {
+        if(i >= candidates.length) return;
+        const src = candidates[i++];
+        const img = new Image();
+        img.onload = () => { logo.src = src; };
+        img.onerror = tryNext;
+        img.src = src + "?v=" + Date.now();
+      };
+
+      // Si el actual falla, prueba alternativas
+      logo.addEventListener("error", () => tryNext(), { once:true });
+    })();
+
+    // Instagram feed (fallback en GitHub Pages)
     async function loadInstagram(limit = 12){
       const grid = document.getElementById("igGrid");
       const errorBox = document.getElementById("igError");
@@ -1131,7 +961,6 @@
         grid.setAttribute("aria-busy", "false");
         if(errorBox) errorBox.style.display = "block";
 
-        // Fallback (GitHub Pages): 12 cards al Instagram
         grid.innerHTML = Array.from({ length: 12 }).map(() => `
           <a class="ig-card" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram">
             <img class="ig-media" src="${AVATAR_FALLBACK}" alt="Instagram Tertulia Oro y Cielo" loading="lazy" decoding="async">
@@ -1158,14 +987,10 @@
 
     loadInstagram(12);
 
-    // Contact form demo (no envío real)
+    // Contact form demo
     document.getElementById("contactForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
-      const name = document.getElementById("name")?.value?.trim();
-      const email = document.getElementById("email")?.value?.trim();
-      const msg = document.getElementById("message")?.value?.trim();
-      if(!name || !email || !msg) return;
-      alert("Mensaje listo ✅\nConecta este form a tu backend (o Formspree/EmailJS) para envío real.");
+      alert("Mensaje listo ✅ (Conecta a backend / Formspree / EmailJS para envío real)");
       e.target.reset();
     });
 
@@ -1178,4 +1003,3 @@
   </script>
 </body>
 </html>
-
