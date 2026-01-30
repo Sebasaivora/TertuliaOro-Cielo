@@ -3,25 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- ✅ Base universal: GitHub Pages (subcarpeta) + Vultr (raíz) -->
   <base href="./">
 
   <title>Tertulia Oro y Cielo | Hinchas de Everton</title>
   <meta name="description" content="Tertulia Oro y Cielo: análisis, debate y pasión ruletera. Novedades, panel y contenido para la familia evertoniana." />
   <meta name="theme-color" content="#061a2d" />
 
-  <!-- Logos / Favicons (ojo mayúsculas: Logos) -->
+  <!-- Favicons / Logos -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/Logos/logo_tertulia_32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/Logos/logo_tertulia_320_opt.png">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Tertulia Oro y Cielo | Hinchas de Everton" />
-  <meta property="og:description" content="El punto de encuentro de la familia evertoniana. Novedades, análisis y contenido Oro & Cielo." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="es_CL" />
   <meta property="og:image" content="assets/img/Logos/logo_tertulia_320_opt.png" />
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet" />
@@ -39,9 +32,12 @@
       --shadow: 0 18px 70px rgba(0,0,0,.45);
       --radius: 18px;
       --container: 1120px;
-      --s3: 16px; --s4: 24px; --s6: 56px; --s7: 80px;
+
+      --s1: 8px; --s2: 12px; --s3: 16px; --s4: 24px; --s5: 36px; --s6: 56px; --s7: 80px;
     }
+
     *{ box-sizing:border-box; }
+    html, body{ height:100%; }
     body{
       margin:0;
       font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -49,15 +45,45 @@
       background:
         radial-gradient(900px 550px at 18% -10%, rgba(246,196,0,.14), transparent 60%),
         radial-gradient(900px 600px at 90% 10%, rgba(10,43,76,.75), transparent 55%),
+        radial-gradient(700px 500px at 40% 90%, rgba(246,196,0,.10), transparent 55%),
         linear-gradient(180deg, var(--azul-900), var(--azul-950) 70%, #030c18);
+      line-height:1.35;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x:hidden;
     }
+
     a{ color:inherit; text-decoration:none; }
     img{ max-width:100%; display:block; }
-    .container{ width:min(var(--container), calc(100% - 2*var(--s4))); margin:0 auto; }
+    button,input,textarea{ font:inherit; }
 
+    :focus-visible{
+      outline:3px solid rgba(246,196,0,.78);
+      outline-offset:3px;
+      border-radius:12px;
+    }
+
+    .container{
+      width:min(var(--container), calc(100% - 2*var(--s4)));
+      margin:0 auto;
+    }
+
+    .bg-pattern{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.22;
+      background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(900px 420px at 50% 20%, #000 35%, transparent 70%);
+      z-index:-1;
+    }
+
+    /* Header */
     .site-header{
-      position:fixed; inset:0 0 auto 0; z-index:50;
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:50;
       transition: background .25s ease, border-color .25s ease;
       border-bottom: 1px solid transparent;
     }
@@ -66,109 +92,458 @@
       backdrop-filter: blur(12px) saturate(140%);
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .nav{ display:flex; align-items:center; justify-content:space-between; gap:var(--s3); padding:14px 0; }
-    .brand{ display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--s3);
+      padding: 14px 0;
+    }
+
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+    }
     .brand-logo{
-      width:44px; height:44px; border-radius:14px; object-fit:cover;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
       border: 1px solid rgba(255,255,255,.12);
       box-shadow: 0 18px 46px rgba(246,196,0,.14);
       background: rgba(255,255,255,.06);
     }
-    .brand-text{ font-weight:900; letter-spacing:.05em; text-transform:uppercase; }
+    .brand-text{
+      font-weight: 900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
     .brand-text span{ color: var(--oro-500); }
-    .nav-links{ display:flex; gap:10px; }
-    .nav-links a{ padding:10px 12px; border-radius:14px; font-weight:900; color: rgba(255,255,255,.86); }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .nav-links a{
+      padding: 10px 12px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.86);
+      font-weight:900;
+      transition: background .2s ease, color .2s ease;
+    }
     .nav-links a:hover{ background: rgba(255,255,255,.06); color:#fff; }
-    .nav-cta{ display:flex; gap:10px; align-items:center; }
+
+    .nav-cta{ display:flex; align-items:center; gap: 10px; }
+
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:11px 16px; border-radius:14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 16px;
+      border-radius: 14px;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.06);
-      font-weight:900; cursor:pointer;
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
       transition: transform .15s ease, background .2s ease, border-color .2s ease;
     }
-    .btn:hover{ background: rgba(255,255,255,.10); transform: translateY(-1px); border-color: rgba(255,255,255,.20); }
+    .btn:hover{
+      background: rgba(255,255,255,.10);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.20);
+    }
     .btn-primary{
       background: linear-gradient(135deg, rgba(246,196,0,1), rgba(246,196,0,.72));
       border-color: rgba(246,196,0,.42);
       color: rgba(0,0,0,.86);
       box-shadow: 0 18px 50px rgba(246,196,0,.14);
     }
+    .btn-primary:hover{ transform: translateY(-2px); }
 
+    .burger{ display:none; }
+    @media (max-width: 860px){
+      .nav-links{ display:none; }
+      .burger{
+        display:inline-flex;
+        width:44px;height:44px;
+        border-radius:14px;
+        border:1px solid var(--stroke);
+        background: rgba(255,255,255,.06);
+        align-items:center; justify-content:center;
+      }
+    }
+
+    /* Hero */
     .hero{
-      position:relative; min-height:92vh; display:grid; place-items:center;
-      overflow:hidden; padding-top:88px; isolation:isolate;
+      position:relative;
+      min-height: 92vh;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      padding-top: 88px;
+      isolation:isolate;
     }
     .hero-bg{
-      position:absolute; inset:0; z-index:0; pointer-events:none;
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
       filter: blur(9px) brightness(.60) saturate(120%);
       transform: scale(1.08);
+      will-change: transform;
     }
     .hero-bg iframe{
-      position:absolute; top:50%; left:50%;
+      position:absolute;
+      top:50%;
+      left:50%;
       transform: translate(-50%, -50%);
-      width: 100vw; height: 56.25vw; min-height:100vh; min-width:177.78vh; border:0;
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.78vh;
+      border:0;
     }
     .hero-overlay{
-      position:absolute; inset:0; z-index:1;
+      position:absolute;
+      inset:0;
+      z-index:1;
       background:
         radial-gradient(900px 540px at 50% 30%, rgba(246,196,0,.12), transparent 60%),
         radial-gradient(900px 540px at 40% 35%, rgba(6,26,45,.08), rgba(6,26,45,.62)),
         linear-gradient(180deg, rgba(6,26,45,.08), rgba(6,26,45,.82));
     }
-    .hero-content{ position:relative; z-index:3; text-align:center; padding: var(--s6) 0; }
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px; border:1px solid rgba(255,255,255,.14);
-      border-radius:999px; background: rgba(255,255,255,.06);
-      font-weight:900; letter-spacing:.12em; text-transform:uppercase; color: rgba(255,255,255,.88);
+    .hero-shine{
+      position:absolute;
+      inset:auto -20% -40% -20%;
+      height: 420px;
+      z-index:2;
+      background: radial-gradient(closest-side, rgba(246,196,0,.18), transparent 70%);
+      filter: blur(12px);
+      pointer-events:none;
     }
-    .dot{ width:10px; height:10px; border-radius:99px; background: var(--oro-500); box-shadow: 0 0 0 6px rgba(246,196,0,.14); }
-    h1{ margin:18px 0 10px; font-size: clamp(2.5rem, 6.2vw, 4.9rem); text-transform:uppercase; font-weight:900; }
+
+    .hero-content{
+      position:relative;
+      z-index:3;
+      text-align:center;
+      padding: var(--s6) 0;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.88);
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: var(--oro-500);
+      box-shadow: 0 0 0 6px rgba(246,196,0,.14);
+    }
+
+    h1{
+      margin: 18px 0 10px;
+      font-size: clamp(2.5rem, 6.2vw, 4.9rem);
+      line-height:1.02;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      font-weight:900;
+      text-shadow: 0 18px 70px rgba(0,0,0,.55);
+    }
     .h1-accent{ color: var(--oro-500); }
-    .lead{ margin:0 auto; max-width:920px; color: var(--muted); font-weight:700; line-height:1.6; }
-    .hero-actions{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:24px; }
 
+    .lead{
+      margin: 0 auto;
+      max-width: 920px;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--muted);
+      font-weight:700;
+      line-height: 1.6;
+    }
+
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-top: 24px;
+    }
+
+    /* Sections */
     section{ padding: var(--s7) 0; }
-    .section-head{ text-align:center; display:grid; gap:10px; margin-bottom:26px; }
-    .section-title{ margin:0; font-size: clamp(1.7rem, 3.1vw, 2.5rem); letter-spacing:.08em; text-transform:uppercase; font-weight:900; color: var(--oro-500); }
-    .section-subtitle{ margin:0 auto; max-width:920px; color: rgba(255,255,255,.76); font-weight:700; line-height:1.6; }
+    .section-head{
+      text-align:center;
+      display:grid;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .section-title{
+      margin:0;
+      font-size: clamp(1.7rem, 3.1vw, 2.5rem);
+      letter-spacing: .08em;
+      text-transform:uppercase;
+      font-weight:900;
+      color: var(--oro-500);
+    }
+    .section-subtitle{
+      margin:0 auto;
+      max-width: 920px;
+      color: rgba(255,255,255,.76);
+      font-weight:700;
+      line-height:1.6;
+    }
 
-    .panel-grid{ display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap:14px; }
+    .wave{
+      height: 18px;
+      width: 100%;
+      background:
+        radial-gradient(18px 18px at 18px 0, transparent 17px, rgba(255,255,255,.12) 18px) repeat-x;
+      background-size: 36px 18px;
+      opacity:.33;
+      margin: 0;
+    }
+
+    /* IG Grid */
+    .ig-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 860px){ .ig-grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 520px){ .ig-grid{ grid-template-columns: 1fr;} }
+
+    .ig-card{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+      aspect-ratio: 1/1;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .ig-card:hover{
+      transform: translateY(-5px);
+      border-color: rgba(246,196,0,.40);
+      background: rgba(255,255,255,.08);
+    }
+    .ig-media{
+      width:100%;height:100%;
+      object-fit:cover;
+      transform: scale(1.02);
+      transition: transform .35s ease;
+      filter: saturate(115%) contrast(105%);
+    }
+    .ig-card:hover .ig-media{ transform: scale(1.06); }
+    .ig-gradient{
+      position:absolute;
+      inset:auto 0 0 0;
+      height: 48%;
+      background: linear-gradient(to top, rgba(0,0,0,.82), transparent);
+      pointer-events:none;
+    }
+    .ig-meta{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding: 14px 14px 12px;
+      display:grid;
+      gap: 6px;
+    }
+    .ig-meta small{
+      color: rgba(255,255,255,.75);
+      font-weight:900;
+      letter-spacing: .02em;
+    }
+    .ig-meta p{
+      margin:0;
+      color: rgba(255,255,255,.92);
+      font-weight:900;
+      font-size: 14px;
+      line-height:1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow:hidden;
+    }
+
+    /* About */
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items: stretch;
+    }
+    @media (max-width: 920px){ .about-grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(520px 260px at 20% 10%, rgba(246,196,0,.12), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .card > *{ position:relative; z-index:1; }
+
+    .about-title{
+      margin:0 0 10px;
+      font-weight:900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      font-size:1.05rem;
+      color: rgba(255,255,255,.92);
+    }
+    .about-text{
+      margin:0;
+      color: rgba(255,255,255,.80);
+      font-weight:700;
+      line-height:1.7;
+    }
+
+    .pill-list{ margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; }
+    .pill{
+      padding:10px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight:900;
+      color: rgba(255,255,255,.88);
+      display:inline-flex; gap:8px; align-items:center;
+    }
+    .pill b{ color: var(--oro-500); }
+
+    /* Panel */
+    .panel-grid{
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap:14px;
+    }
     @media (max-width:1100px){ .panel-grid{ grid-template-columns:repeat(3,1fr);} }
     @media (max-width:720px){ .panel-grid{ grid-template-columns:repeat(2,1fr);} }
     @media (max-width:430px){ .panel-grid{ grid-template-columns:1fr;} }
+
     .member{
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       border-radius: var(--radius);
       overflow:hidden;
       box-shadow: var(--shadow);
+      transition: transform .18s ease, border-color .18s ease;
     }
+    .member:hover{ transform: translateY(-4px); border-color: rgba(246,196,0,.35); }
+
     .avatar{
       aspect-ratio: 1/1;
       overflow:hidden;
       border-bottom: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(135deg, rgba(10,43,76,.85), rgba(6,26,45,.85));
     }
-    .avatar img{ width:100%; height:100%; object-fit:cover; object-position:center top; }
+    .avatar img{ width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+
     .member-body{ padding:14px 14px 16px; }
     .member-body h3{ margin:0 0 6px; font-size:.98rem; font-weight:900; text-transform:uppercase; letter-spacing:.03em; }
     .member-body p{ margin:0; color: rgba(255,255,255,.78); font-weight:900; line-height:1.45; }
+
+    /* Footer */
+    footer{
+      background: linear-gradient(180deg, rgba(6,26,45,.85), rgba(4,16,31,.95));
+      border-top: 5px solid var(--oro-500);
+      padding: var(--s7) 0;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:start;
+    }
+    @media (max-width: 860px){ .footer-grid{ grid-template-columns:1fr; } }
+
+    .footer-title{
+      margin:0 0 10px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .footer-note{
+      margin:0;
+      color: rgba(255,255,255,.74);
+      font-weight:700;
+      line-height:1.65;
+    }
+
+    .form{ display:grid; gap:12px; margin-top:12px; }
+    .field{ display:grid; gap:6px; }
+    label{ font-size:13px; color: rgba(255,255,255,.82); font-weight:900; }
+    input, textarea{
+      width:100%;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:#fff;
+      outline:none;
+    }
+    input:focus, textarea:focus{ border-color: rgba(246,196,0,.55); background: rgba(0,0,0,.28); }
+    textarea{ resize: vertical; min-height:110px; }
+
+    .footer-bottom{
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.62);
+      font-weight: 900;
+      font-size: 13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content: space-between;
+      align-items:center;
+    }
+
+    .reveal{ opacity:0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.is-in{ opacity:1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce){
+      .btn, .member, .ig-card, .ig-media{ transition:none; }
+      .reveal{ opacity:1; transform:none; }
+    }
   </style>
 </head>
 
 <body>
-  <header class="site-header" id="header">
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <header class="site-header" id="header" aria-label="Barra de navegación">
     <div class="container">
       <nav class="nav">
-        <a class="brand" href="#inicio">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
           <img class="brand-logo" src="assets/img/Logos/logo_tertulia_320_opt.png" alt="Tertulia Oro y Cielo">
           <span class="brand-text">Tertulia <span>Oro y Cielo</span></span>
         </a>
 
         <div class="nav-links" id="navLinks">
+          <a href="#novedades">Novedades</a>
+          <a href="#quienes">Quiénes somos</a>
           <a href="#panel">Panel</a>
           <a href="#contacto">Contacto</a>
         </div>
@@ -176,69 +551,198 @@
         <div class="nav-cta">
           <a class="btn" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a class="btn btn-primary" href="#contacto">Hablemos</a>
+          <button class="burger" type="button" aria-label="Abrir menú" title="Menú" onclick="toggleMobileMenu()">☰</button>
         </div>
       </nav>
     </div>
   </header>
 
   <main id="inicio">
-    <section class="hero">
+    <section class="hero" aria-label="Portada">
       <div class="hero-bg" id="heroBg" aria-hidden="true">
         <iframe
+          id="heroIframe"
           title="Video de fondo"
           src="https://www.youtube-nocookie.com/embed/T3g5TTlU3fQ?autoplay=1&mute=1&loop=1&playlist=T3g5TTlU3fQ&controls=0&rel=0&modestbranding=1&playsinline=1"
           allow="autoplay; encrypted-media; picture-in-picture"
           allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
         ></iframe>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-shine" aria-hidden="true"></div>
 
-      <div class="container hero-content">
-        <div class="kicker"><span class="dot"></span> Viña del Mar • Debate • Pasión</div>
+      <div class="container hero-content reveal">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> Viña del Mar • Debate • Pasión</div>
         <h1><span class="h1-accent">Oro</span> &amp; Cielo</h1>
-        <p class="lead">Comunidad ruletera para analizar, debatir y vivir Everton con identidad.</p>
+        <p class="lead">Comunidad ruletera para analizar, debatir y vivir Everton con identidad. Novedades, entrevistas e información semanal.</p>
+
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#panel">Ver panel</a>
+          <a class="btn btn-primary" href="#novedades">Ver novedades</a>
           <a class="btn" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Seguir en Instagram</a>
         </div>
       </div>
     </section>
 
-    <section id="panel">
+    <div class="wave" aria-hidden="true"></div>
+
+    <!-- NOVEDADES -->
+    <section id="novedades" aria-label="Novedades">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
+          <h2 class="section-title">Novedades Ruleteras</h2>
+          <p class="section-subtitle">
+            En GitHub Pages se muestra un fallback (sin backend). Al pasar a Vultr, activamos el feed real.
+          </p>
+        </div>
+
+        <div class="ig-grid reveal" id="igGrid" aria-live="polite" aria-busy="true">
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%230a2b4c'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>@tertulia_oroycielo — Ver publicaciones</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%23061a2d'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Novedades Oro &amp; Cielo</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%230a2b4c'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Entrevistas y programas</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%23061a2d'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Actualidad del equipo</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%230a2b4c'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Todo el acontecer diario</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%23061a2d'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Ruleteros informados</p></div></div>
+
+          <!-- 6 más -->
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%230a2b4c'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Programas semanales</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%23061a2d'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Información y debate</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%230a2b4c'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Oro &amp; Cielo</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%23061a2d'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Viña del Mar</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%230a2b4c'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Entrevistas</p></div></div>
+          <div class="ig-card"><img class="ig-media" src="data:image/svg+xml;charset=utf-8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='%23061a2d'/></svg>" alt="Instagram" loading="lazy"><div class="ig-gradient"></div><div class="ig-meta"><small>Instagram</small><p>Noticias del club</p></div></div>
+        </div>
+
+        <div style="text-align:center;margin-top:16px;" class="reveal">
+          <a class="btn btn-primary" href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave" aria-hidden="true"></div>
+
+    <!-- QUIÉNES SOMOS -->
+    <section id="quienes" aria-label="Quiénes somos">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title">Quiénes Somos</h2>
+          <p class="section-subtitle">Historia, propósito y enfoque del programa.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="card reveal">
+            <h3 class="about-title">Nuestra historia</h3>
+            <p class="about-text">
+              <strong>Tertulia Oro y Cielo</strong> se fundó el <strong>21 de abril de 2021</strong>, cuando
+              <strong>Jonathan Gonzalez Araya</strong> y <strong>Marcos Guardia</strong> decidieron crear un medio de comunicación
+              dedicado a informar a toda la comunidad de Everton sobre el acontecer diario del equipo de Viña del Mar.
+              Nuestro objetivo es generar <strong>entrevistas</strong>, <strong>información</strong> y <strong>programas semanales</strong>
+              para mantener a la afición siempre al día con todo lo que ocurre en el mundo <strong>Oro y Cielo</strong>.
+            </p>
+
+            <div class="pill-list">
+              <span class="pill">🎙️ <b>Programas</b> semanales</span>
+              <span class="pill">🗞️ <b>Información</b> diaria</span>
+              <span class="pill">🎤 <b>Entrevistas</b> y comunidad</span>
+              <span class="pill">💛 <b>Identidad</b> Oro &amp; Cielo</span>
+            </div>
+          </article>
+
+          <aside class="card reveal">
+            <h3 class="about-title">Nuestro enfoque</h3>
+            <p class="about-text">
+              Conversación con respeto, análisis con criterio y una misión clara:
+              conectar a la hinchada con el club a través de contenido constante, cercano y bien informado.
+            </p>
+
+            <div style="margin-top:14px;display:grid;gap:12px;">
+              <div style="border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);border-radius:16px;padding:14px;">
+                <div style="color:var(--oro-500);font-weight:900;font-size:1.2rem;">Desde 2021</div>
+                <div style="color:rgba(255,255,255,.78);font-weight:900;margin-top:4px;">Contenido para la familia evertoniana</div>
+              </div>
+              <div style="border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);border-radius:16px;padding:14px;">
+                <div style="color:var(--oro-500);font-weight:900;font-size:1.2rem;">Viña del Mar</div>
+                <div style="color:rgba(255,255,255,.78);font-weight:900;margin-top:4px;">El corazón del sentimiento ruletero</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave" aria-hidden="true"></div>
+
+    <!-- PANEL -->
+    <section id="panel" aria-label="Panel">
+      <div class="container">
+        <div class="section-head reveal">
           <h2 class="section-title">Panel Oro &amp; Cielo</h2>
           <p class="section-subtitle">Equipo completo con nombres y cargos.</p>
         </div>
 
         <div class="panel-grid">
-          <article class="member"><div class="avatar"><img src="assets/img/panel/jonathan-gonzalez.webp" alt="Jonathan Gonzalez" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jonathan Gonzalez</h3><p>Director</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/marcos-guardia.webp" alt="Marcos Guardia" onerror="imgFallback(this)"></div><div class="member-body"><h3>Marcos Guardia</h3><p>Representante Legal</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/alejandra-pimentel.webp" alt="Alejandra Pimentel" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Pimentel</h3><p>Conductora, Panelista y Periodista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/alonso-aravena.webp" alt="Alonso Aravena" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alonso Aravena</h3><p>Diseñador Gráfico</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/constanza-guardia.webp" alt="Constanza Guardia" onerror="imgFallback(this)"></div><div class="member-body"><h3>Constanza Guardia</h3><p>Moderadora 1</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/alejandra-rivera.webp" alt="Alejandra Rivera" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Rivera</h3><p>Moderadora 2</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/macarena-molina.webp" alt="Macarena Molina" onerror="imgFallback(this)"></div><div class="member-body"><h3>Macarena Molina</h3><p>Moderadora 3</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/victor-arancibia.webp" alt="Victor Arancibia" onerror="imgFallback(this)"></div><div class="member-body"><h3>Victor Arancibia</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/jaime-hernandez.webp" alt="Jaime Hernandez" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jaime Hernandez</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/paulina-moreno.webp" alt="Paulina Moreno" onerror="imgFallback(this)"></div><div class="member-body"><h3>Paulina Moreno</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/claudio-ibanez.webp" alt="Claudio Ibañez" onerror="imgFallback(this)"></div><div class="member-body"><h3>Claudio Ibañez</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/macarena-gonzalez.webp" alt="Macarena Gonzalez" onerror="imgFallback(this)"></div><div class="member-body"><h3>Macarena Gonzalez</h3><p>Conductor y Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/diego-veliz.webp" alt="Diego Veliz" onerror="imgFallback(this)"></div><div class="member-body"><h3>Diego Veliz</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/bastian-campos.webp" alt="Bastian Campos" onerror="imgFallback(this)"></div><div class="member-body"><h3>Bastian Campos</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/camila-diaz.webp" alt="Camila Diaz" onerror="imgFallback(this)"></div><div class="member-body"><h3>Camila Diaz</h3><p>Reportera Gráfica</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/daniel-nunez.webp" alt="Daniel Nuñez" onerror="imgFallback(this)"></div><div class="member-body"><h3>Daniel Nuñez</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/esteban-cid.webp" alt="Esteban Cid" onerror="imgFallback(this)"></div><div class="member-body"><h3>Esteban Cid</h3><p>Panelista</p></div></article>
-          <article class="member"><div class="avatar"><img src="assets/img/panel/daniela-diaz.webp" alt="Daniela Diaz" onerror="imgFallback(this)"></div><div class="member-body"><h3>Daniela Diaz</h3><p>Panelista</p></div></article>
+          <!-- Usa onerror por si falta alguna foto -->
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/jonathan-gonzalez.webp" alt="Jonathan Gonzalez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jonathan Gonzalez</h3><p>Director</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/marcos-guardia.webp" alt="Marcos Guardia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Marcos Guardia</h3><p>Representante Legal</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alejandra-pimentel.webp" alt="Alejandra Pimentel" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Pimentel</h3><p>Conductora, Panelista y Periodista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alonso-aravena.webp" alt="Alonso Aravena" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alonso Aravena</h3><p>Diseñador Gráfico</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/constanza-guardia.webp" alt="Constanza Guardia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Constanza Guardia</h3><p>Moderadora 1</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/alejandra-rivera.webp" alt="Alejandra Rivera" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Alejandra Rivera</h3><p>Moderadora 2</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/macarena-molina.webp" alt="Macarena Molina" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Macarena Molina</h3><p>Moderadora 3</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/victor-arancibia.webp" alt="Victor Arancibia" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Victor Arancibia</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/jaime-hernandez.webp" alt="Jaime Hernandez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Jaime Hernandez</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/paulina-moreno.webp" alt="Paulina Moreno" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Paulina Moreno</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/claudio-ibanez.webp" alt="Claudio Ibañez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Claudio Ibañez</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/macarena-gonzalez.webp" alt="Macarena Gonzalez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Macarena Gonzalez</h3><p>Conductor y Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/diego-veliz.webp" alt="Diego Veliz" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Diego Veliz</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/bastian-campos.webp" alt="Bastian Campos" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Bastian Campos</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/camila-diaz.webp" alt="Camila Diaz" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Camila Diaz</h3><p>Reportera Gráfica</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/daniel-nunez.webp" alt="Daniel Nuñez" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Daniel Nuñez</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/esteban-cid.webp" alt="Esteban Cid" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Esteban Cid</h3><p>Panelista</p></div></article>
+          <article class="member reveal"><div class="avatar"><img src="assets/img/panel/daniela-diaz.webp" alt="Daniela Diaz" loading="lazy" decoding="async" onerror="imgFallback(this)"></div><div class="member-body"><h3>Daniela Diaz</h3><p>Panelista</p></div></article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer id="contacto" style="padding:80px 0; text-align:center;">
+  <footer id="contacto" aria-label="Contacto">
     <div class="container">
-      <p style="color:rgba(255,255,255,.74);font-weight:800;">Instagram: <a href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" style="color:var(--oro-500);">@tertulia_oroycielo</a></p>
-      <p id="copyright" style="margin-top:18px;color:rgba(255,255,255,.62);font-weight:800;"></p>
+      <div class="footer-grid">
+        <div class="reveal">
+          <h2 class="footer-title">Contacto</h2>
+          <p class="footer-note">¿Colaboraciones, entrevistas o sponsors? Escríbenos y coordinamos.</p>
+          <p class="footer-note" style="margin-top:10px;">
+            Instagram:
+            <a href="https://www.instagram.com/tertulia_oroycielo/" target="_blank" rel="noopener noreferrer" style="color: var(--oro-500); font-weight:900;">
+              @tertulia_oroycielo
+            </a>
+          </p>
+        </div>
+
+        <form class="form reveal" id="contactForm">
+          <div class="field">
+            <label for="name">Nombre completo</label>
+            <input id="name" name="name" type="text" placeholder="Tu nombre" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" placeholder="tunombre@correo.com" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" placeholder="Cuéntanos algo, ruletero..." required></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <span id="copyright"></span>
+        <span>Azul manda, Oro brilla ✦</span>
+      </div>
     </div>
   </footer>
 
@@ -269,6 +773,50 @@
       window.addEventListener("scroll", onScroll, { passive:true });
       onScroll();
     })();
+
+    // Mobile menu
+    function toggleMobileMenu(){
+      const links = document.getElementById("navLinks");
+      if(!links) return;
+      const isOpen = links.style.display === "flex";
+      links.style.display = isOpen ? "none" : "flex";
+      links.style.flexDirection = "column";
+      links.style.position = "absolute";
+      links.style.top = "64px";
+      links.style.right = "16px";
+      links.style.padding = "10px";
+      links.style.background = "rgba(6,26,45,.92)";
+      links.style.border = "1px solid rgba(255,255,255,.14)";
+      links.style.borderRadius = "16px";
+      links.style.backdropFilter = "blur(12px)";
+      links.style.minWidth = "240px";
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
+
+    // Reveal
+    (function(){
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(prefersReduced){
+        document.querySelectorAll(".reveal").forEach(el => el.classList.add("is-in"));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    })();
+
+    // Contact demo
+    document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Mensaje listo ✅ (Conecta a backend / Formspree / EmailJS para envío real)");
+      e.target.reset();
+    });
 
     // Footer year
     (function(){
